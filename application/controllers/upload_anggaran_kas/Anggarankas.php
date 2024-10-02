@@ -1,15 +1,22 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+$php_versi = substr(phpversion(),0,1);
+if($php_versi>6){
+    require 'vendor/autoload.php';
+}
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Anggarankas extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('PHPExcel');
         $this->load->model('M_fungsi', 'fungsi');
         $this->user = is_logged_in();
         $this->akses = cek_akses_user();
+        $php_versi = substr(phpversion(),0,1);
+        if($php_versi<6){$this->load->library('PHPExcel');}
     }
 
     public function index()
@@ -118,11 +125,10 @@ class Anggarankas extends CI_Controller
     {
         $post = $this->input->post(null, TRUE);
         $id_skpd = htmlspecialchars($post['id_skpd']);
-        $object = new PHPExcel();
         $new_file = "";
 
         $config['upload_path'] = "./uploads/berkas/excel/";
-        $config['allowed_types'] = 'xls';
+        $config['allowed_types'] = 'xlsx';
         $config['file_name'] = 'anggaran_kas_' . $id_skpd . '_' . date("Ymd-His");
         $config['max_size'] = 1012;
 
@@ -141,19 +147,37 @@ class Anggarankas extends CI_Controller
 
             if ($new_file != "" || $new_file != NULL) 
             {
-                $excelreader     = new PHPExcel_Reader_Excel5();
-                $loadexcel         = $excelreader->load('./uploads/berkas/excel/' . $new_file);
-                $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
                 
-                $numrow = 0;
-                $cek_validasi=0;
-                foreach ($sheet as $row) {
-                    $numrow++;
-                    if ($numrow == 10) {
-                        if ($row['B']== "BELANJA"){$cek_validasi=1;}
+                $php_versi = substr(phpversion(),0,1);
+                if($php_versi<6){
+                    $object = new PHPExcel();
+                    $excelreader     = new PHPExcel_Reader_Excel2007();
+                    $loadexcel         = $excelreader->load('./uploads/berkas/excel/' . $new_file);
+                    $sheetData = $loadexcel->getSheet(0)->toArray(null, true, true, true);
+                    
+                    $numrow = 0;
+                    $cek_validasi=0;
+                    foreach ($sheetData as $row) {
+                        $numrow++;
+                        if ($numrow == 8) {
+                            if ($row['B']== "BELANJA"){$cek_validasi=1;}
+                        }
+                    }
+                }else{
+                    $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                    $spreadsheet = $reader->load('./uploads/berkas/excel/' . $new_file);
+                    $numrow = 0;
+                    $cek_validasi=0;
+                    $sheetData = $spreadsheet->getSheet(0)->toArray();
+                    unset($sheetData[0]);
+                    foreach ($sheetData as $row) {
+                        $numrow++;
+                        if ($numrow == 7) {
+                            if ($row[1]== "BELANJA"){$cek_validasi=1;}
+                        }
                     }
                 }
-
+                
                 if($cek_validasi==0)
                 {
                     $errors = [
@@ -167,9 +191,10 @@ class Anggarankas extends CI_Controller
                     $numrow = 0;
                     $anggaran=0;
                     $realisasi=array();
-                    foreach ($sheet as $row) {
+                    foreach ($sheetData as $row) {
                         $numrow++; 
-                        if ($numrow == 10) {
+                        if($php_versi<6){
+                            if ($numrow == 8) {
                                 $anggaran = number_only($row['C']);
                                 $realisasi[1] = number_only($row['E']);
                                 $realisasi[2] = number_only($row['F']);
@@ -184,6 +209,23 @@ class Anggarankas extends CI_Controller
                                 $realisasi[11] = number_only($row['R']);
                                 $realisasi[12] = number_only($row['S']);
                             }
+                        }else{
+                            if ($numrow == 7) {
+                                $anggaran = number_only($row[2]);
+                                $realisasi[1] = number_only($row[4]);
+                                $realisasi[2] = number_only($row[5]);
+                                $realisasi[3] = number_only($row[6]);
+                                $realisasi[4] = number_only($row[8]);
+                                $realisasi[5] = number_only($row[9]);
+                                $realisasi[6] = number_only($row[10]);
+                                $realisasi[7] = number_only($row[12]);
+                                $realisasi[8] = number_only($row[13]);
+                                $realisasi[9] = number_only($row[14]);
+                                $realisasi[10] = number_only($row[16]);
+                                $realisasi[11] = number_only($row[17]);
+                                $realisasi[12] = number_only($row[18]);
+                            }
+                        }
                     }
 
                         $row_anggaran_kas=$this->mquery->select_id("anggaran_kas", ['id_skpd' => $id_skpd, 'tahun' => $post['tahun']]);

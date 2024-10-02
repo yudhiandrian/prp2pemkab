@@ -6,7 +6,6 @@ class Skpd extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('PHPExcel');
         $this->user = is_logged_in();
         $this->akses = cek_akses_user();
     }

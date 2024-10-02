@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="file">File Excel</label>
                         <input type="hidden" name="id_skpd" id="id_skpd" value="<?= $id_skpd ?>">
-                        <input type="file" name="file_upload" id="file_upload" class="form-control" accept=".xls">
+                        <input type="file" name="file_upload" id="file_upload" class="form-control" accept=".xlsx">
                         <small class="text-danger file_upload"></small>
                     </div>
                 </div>

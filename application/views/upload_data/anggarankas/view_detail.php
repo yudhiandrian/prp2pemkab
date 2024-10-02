@@ -19,7 +19,7 @@
                     <div class="d-flex align-items-left flex-column flex-sm-row">
                     <h3 class="pb-3 fw-bold"><?= $skpd['nama_skpd'] ?></h3>
                         <div class="ml-sm-auto py-md-0">
-                            <a href="<?= base_url('uploads/format/Format_Anggaran_Kas.xls') ?>" target="_blank" class="btn btn-success btn-round btn-sm mr-2 mb-3"><i class="fa fa-download"></i> Format Excel</a>
+                            <a href="<?= base_url('uploads/format/Format_Anggaran_Kas.xlsx') ?>" target="_blank" class="btn btn-success btn-round btn-sm mr-2 mb-3"><i class="fa fa-download"></i> Format Excel</a>
                             <?php if($tahun_now==$tahun){ ?>
                                 <button id="tombol-upload" class="btn btn-warning btn-round btn-sm mr-2 mb-3" data-toggle="modal" data-target="#modal-form-action">Upload Excel</button>
                             <?php } ?>
