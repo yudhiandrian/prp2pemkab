@@ -130,12 +130,14 @@ class Kegiatan extends CI_Controller
     public function skpd($tahun, $encrypt_id)
     {
         if ($this->akses['akses'] == 'Y') {
+            $php_versi = substr(phpversion(),0,1);
             $id_skpd = decrypt_url($encrypt_id);
             $skpd = $this->mquery->select_id('data_skpd', ['id_skpd' => $id_skpd]);
             $data = [
                 "menu_active" => "kegiatan",
                 "submenu_active" => null,
                 "skpd" => $skpd,
+                "php_versi" => $php_versi,
                 "tahun" => $tahun,
                 "encrypt_id" => $encrypt_id
             ];

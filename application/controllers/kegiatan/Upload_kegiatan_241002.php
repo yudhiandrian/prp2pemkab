@@ -143,9 +143,9 @@ class Upload_kegiatan extends CI_Controller
                     $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
                     $spreadsheet = $reader->load('./uploads/berkas/excel/' . $new_file);
                     $sheetData = $spreadsheet->getSheet(0)->toArray();
-                    $baris_awal = 4;
+                    $baris_awal = 3;
                 }
-
+                
                 $pagu = '';
                 $this->db->trans_start();
                 $numrow = 0;
@@ -219,8 +219,8 @@ class Upload_kegiatan extends CI_Controller
                     $numrow++;
                 }
 
-                if($php_versi<6){$sheetData = $loadexcel->getSheet(1)->toArray(null, true, true, true);}
-                else{$sheetData = $spreadsheet->getSheet(1)->toArray();}
+
+                $sheetData = $loadexcel->getSheet(1)->toArray(null, true, true, true);
                 $numrow = 0;
                 foreach ($sheetData as $row) {
                     if ($numrow > $baris_awal) {
@@ -285,8 +285,7 @@ class Upload_kegiatan extends CI_Controller
                     $numrow++;
                 }
 
-                if($php_versi<6){$sheetData = $loadexcel->getSheet(2)->toArray(null, true, true, true);}
-                else{$sheetData = $spreadsheet->getSheet(2)->toArray();}
+                $sheetData = $loadexcel->getSheet(2)->toArray(null, true, true, true);
                 $numrow = 0;
                 foreach ($sheetData as $row) {
                     if ($numrow > $baris_awal) {
@@ -349,8 +348,7 @@ class Upload_kegiatan extends CI_Controller
                     $numrow++;
                 }
 
-                if($php_versi<6){$sheetData = $loadexcel->getSheet(3)->toArray(null, true, true, true);}
-                else{$sheetData = $spreadsheet->getSheet(3)->toArray();}
+                $sheetData = $loadexcel->getSheet(3)->toArray(null, true, true, true);
                 $numrow = 0;
                 foreach ($sheetData as $row) {
                     if ($numrow > $baris_awal) {
@@ -389,9 +387,6 @@ class Upload_kegiatan extends CI_Controller
                 
                 $this->db->trans_complete();
                 $res = $this->db->trans_status();
-
-                hapus_file("/uploads/berkas/excel/" , $new_file);
-                $res = 1;
                 $data = ['status' => TRUE, 'notif' => $res];
                 $this->output->set_content_type('application/json')->set_output(json_encode($data));
             }

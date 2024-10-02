@@ -1,6 +1,5 @@
 <?php 
    
-$result_kabupaten_id = $this->mquery->select_id('ta_kabupaten',['id_kabupaten' => 34]);
 $bulan = array(
     '01' => 'Jan',
     '02' => 'Feb',
@@ -17,16 +16,15 @@ $bulan = array(
 );
 // echo $id_pertemuan."<br>";
 
-
 $object = new PHPExcel();
 // Set document properties
-$object->getProperties()->setCreator("PRP2PEMKAB")
- ->setLastModifiedBy("PRP2PEMKAB")
+$object->getProperties()->setCreator("PRP2SUMUT")
+ ->setLastModifiedBy("PRP2SUMUT")
  ->setTitle("Presensi")
  ->setSubject("Laporan Kegiatan Fisik")
- ->setDescription("PRP2PEMKAB")
+ ->setDescription("PRP2SUMUT")
  ->setKeywords("office 2007 openxml php")
- ->setCategory("PRP2PEMKAB");
+ ->setCategory("PRP2SUMUT");
 
 $object->setActiveSheetIndex(0)->setTitle("Kegiatan");
 
@@ -73,7 +71,7 @@ $HeaderstyleArray = array(
 
 $object->getActiveSheet()->getStyle('A1:A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
-$object->getActiveSheet()->mergeCells('A1:M1')->setCellValue('A1', "PEMERINTAH ".$result_kabupaten_id['nama_kabupaten']);
+$object->getActiveSheet()->mergeCells('A1:M1')->setCellValue('A1', "PEMERINTAH KABUPATEN DELI SERDANG");
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
 $object->getActiveSheet()->mergeCells('A2:M2')->setCellValue('A2', "DAFTAR KEGIATAN FISIK");
 $object->getActiveSheet()->setCellValue('A3', "SKPD : ".$skpd['nama_skpd']);
@@ -91,6 +89,7 @@ $object->getActiveSheet()->getColumnDimension('J')->setWidth(25);
 $object->getActiveSheet()->getColumnDimension('K')->setWidth(7);
 $object->getActiveSheet()->getColumnDimension('L')->setWidth(20);
 $object->getActiveSheet()->getColumnDimension('M')->setWidth(25);
+
 
 $object->getActiveSheet()->getRowDimension('5')->setRowHeight(45);
 $object->getActiveSheet()->getStyle('A5:M5')->getAlignment()->setWrapText(true); 
@@ -151,7 +150,7 @@ $object->setActiveSheetIndex(1)->setTitle("Realisasi Fisik");
 
 $object->getActiveSheet()->getStyle('A1:A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
-$object->getActiveSheet()->mergeCells('A1:J1')->setCellValue('A1', "PEMERINTAH ".$result_kabupaten_id['nama_kabupaten']);
+$object->getActiveSheet()->mergeCells('A1:J1')->setCellValue('A1', "PEMERINTAH KABUPATEN DELI SERDANG");
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
 $object->getActiveSheet()->mergeCells('A2:J2')->setCellValue('A2', "DATA REALISASI FISIK");
 $object->getActiveSheet()->setCellValue('A3', "SKPD : ".$skpd['nama_skpd']);
@@ -250,7 +249,7 @@ $object->setActiveSheetIndex(2)->setTitle("Realisasi Keuangan");
 
 $object->getActiveSheet()->getStyle('A1:A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
-$object->getActiveSheet()->mergeCells('A1:G1')->setCellValue('A1', "PEMERINTAH ".$result_kabupaten_id['nama_kabupaten']);
+$object->getActiveSheet()->mergeCells('A1:G1')->setCellValue('A1', "PEMERINTAH KABUPATEN DELI SERDANG");
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
 $object->getActiveSheet()->mergeCells('A2:G2')->setCellValue('A2', "DATA REALISASI KEUANGAN");
 $object->getActiveSheet()->setCellValue('A3', "SKPD : ".$skpd['nama_skpd']);
@@ -332,7 +331,7 @@ $object->setActiveSheetIndex(3)->setTitle("Nama KPA");
 
 $object->getActiveSheet()->getStyle('A1:A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
-$object->getActiveSheet()->mergeCells('A1:E1')->setCellValue('A1', "PEMERINTAH ".$result_kabupaten_id['nama_kabupaten']);
+$object->getActiveSheet()->mergeCells('A1:E1')->setCellValue('A1', "PEMERINTAH KABUPATEN DELI SERDANG");
 $object->getActiveSheet()->getStyle('A1:A2')->getFont()->setSize(14)->setBold(true);
 $object->getActiveSheet()->mergeCells('A2:E2')->setCellValue('A2', "DATA REALISASI KEUANGAN");
 $object->getActiveSheet()->setCellValue('A3', "SKPD : ".$skpd['nama_skpd']);
@@ -397,9 +396,8 @@ foreach ($ta_kontrak as $r)
     }
 }
 
-//$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
-$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel2007');
+$object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
 header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="Laporan Kegiatan Fisik.xlsx"');
+header('Content-Disposition: attachment;filename="Laporan Kegiatan Fisik.xls"');
 $object_writer->save('php://output');
 ?>

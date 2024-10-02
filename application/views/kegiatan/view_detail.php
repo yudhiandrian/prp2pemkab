@@ -7,7 +7,11 @@
                 <div class="ml-sm-auto py-md-0">
                     <button id="tombol-upload" class="btn btn-warning btn-round btn-sm mr-2 mb-3" data-toggle="modal" data-target="#modal-form-upload">Upload Excel</button>
                     <button id="tombol-tambah" data-id="<?= $skpd['id_skpd']; ?>" class="btn btn-secondary btn-round btn-sm mr-2 mb-3" data-toggle="modal" data-target="#modal-form-action">TAMBAH DATA</button>
-                    <a class="btn btn-success btn-round btn-sm mr-2 mb-3" href="<?= site_url('kegiatan/kegiatan_fisik/download_excel/'.$tahun.'/'.$encrypt_id) ?>">Download Excel</a>
+                    <?php if($php_versi<6){ ?>
+                        <a class="btn btn-success btn-round btn-sm mr-2 mb-3" href="<?= site_url('kegiatan/kegiatan_fisik/download_excel/'.$tahun.'/'.$encrypt_id) ?>">Download Excel</a>
+                    <?php }else{ ?>
+                        <a class="btn btn-success btn-round btn-sm mr-2 mb-3" href="<?= site_url('kegiatan/cetak/index/'.$tahun.'/'.$encrypt_id) ?>">Download Excel</a>
+                    <?php } ?>
                 </div>
             <?php } ?>
         </div>

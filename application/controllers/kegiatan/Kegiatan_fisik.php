@@ -9,7 +9,8 @@ class Kegiatan_fisik extends CI_Controller
         $this->load->model('Kegiatan_model', 'kegiatan');
         $this->user = is_logged_in();
         $this->akses = cek_akses_user();
-		$this->load->library('PHPExcel');
+        $php_versi = substr(phpversion(),0,1);
+        if($php_versi<6){$this->load->library('PHPExcel');}
     }
 
     public function infrastruktur($tahun, $encrypt_id)
@@ -401,7 +402,9 @@ class Kegiatan_fisik extends CI_Controller
                 "encrypt_id" => $encrypt_id,
                 "ta_kontrak" => $this->mquery->select_by('ta_kontrak', ['kd_urusan' => $skpd['kd_urusan'], 'kd_bidang' => $skpd['kd_bidang'], 'kd_unit' => $skpd['kd_unit'], 'kd_sub' => $skpd['kd_sub'], 'tahun'=> $tahun])
             ];
-            $this->load->view('kegiatan/cetak_excel', $data);
+            $php_versi = substr(phpversion(),0,1);
+            if($php_versi<6){$this->load->view('kegiatan/cetak_excel', $data);}
+            else{$this->load->view('kegiatan/cetak_excel_php7', $data);}
     }
 
     public function status($nilai, $id, $encrypt_id)
