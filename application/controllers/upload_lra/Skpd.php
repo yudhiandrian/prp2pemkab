@@ -1,15 +1,23 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+$php_versi = substr(phpversion(),0,1);
+if($php_versi>6){
+    require 'vendor/autoload.php';
+}
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+    
 class Skpd extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('PHPExcel');
         $this->load->model('M_fungsi', 'fungsi');
         $this->user = is_logged_in();
         $this->akses = cek_akses_user();
+        $php_versi = substr(phpversion(),0,1);
+        if($php_versi<6){$this->load->library('PHPExcel');}
+        
     }
 
     public function index()
@@ -409,7 +417,6 @@ class Skpd extends CI_Controller
             $post = $this->input->post(null, TRUE);
             $id_skpd = htmlspecialchars($post['id_skpd']);
 
-            $object = new PHPExcel();
             $new_file = "";
             
             $config['upload_path'] = "./uploads/berkas/excel/";
@@ -429,20 +436,41 @@ class Skpd extends CI_Controller
                 $new_file = $upload['file_name'];
 
                 if ($new_file != "" || $new_file != NULL) {
-                    $excelreader     = new PHPExcel_Reader_Excel2007();
-                    $loadexcel         = $excelreader->load('./uploads/berkas/excel/' . $new_file);
-                    $sheet = $loadexcel->getSheet(0)->toArray(null, true, true, true);
+                    
+                    $php_versi = substr(phpversion(),0,1);
+                    if($php_versi<6){
+                        $object = new PHPExcel();
+                        $excelreader     = new PHPExcel_Reader_Excel2007();
+                        $loadexcel         = $excelreader->load('./uploads/berkas/excel/' . $new_file);
+                        $sheetData = $loadexcel->getSheet(0)->toArray(null, true, true, true);
 
-                    $numrow = 0;
-                    $cek_validasi=0;
-                    foreach ($sheet as $row) {
-                        if ($numrow > 10) {
-                            $cek_D = strlen($row['D']);
-                            if ($cek_D != 0) {
-                                if ($row['H']== "BELANJA DAERAH"){$cek_validasi=1;}
+                        $numrow = 0;
+                        $cek_validasi=0;
+                        foreach ($sheetData as $row) {
+                            if ($numrow > 10) {
+                                $cek_D = strlen($row['D']);
+                                if ($cek_D != 0) {
+                                    if ($row['H']== "BELANJA DAERAH"){$cek_validasi=1;}
+                                }
                             }
+                            $numrow++;
                         }
-                        $numrow++;
+                    }else{
+                        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                        $spreadsheet = $reader->load('./uploads/berkas/excel/' . $new_file);
+                        $numrow = 0;
+                        $cek_validasi=0;
+                        $sheetData = $spreadsheet->getSheet(0)->toArray();
+                        unset($sheetData[0]);
+                        foreach ($sheetData as $row) {
+                            if ($numrow > 10) {
+                                $cek_D = strlen($row[3]);
+                                if ($cek_D != 0) {
+                                    if ($row[7]== "BELANJA DAERAH"){$cek_validasi=1;}
+                                }
+                            }
+                            $numrow++;
+                        }
                     }
 
                     if($cek_validasi==0)
@@ -470,33 +498,62 @@ class Skpd extends CI_Controller
                         else{$hsl_stanggaran=2;}
                         $temp_bulan=substr($cek_tanggal,5,2);
                         $hsl_bulan=intval($temp_bulan);
-                        foreach ($sheet as $row) {
-                            if ($numrow > 10) {
-                                $cek_D = strlen($row['D']);
-                                if ($cek_D != 0) {
-                                    $kode_rekening=str_replace(' ','',$row['D']);
-                                    $cek_koma=strpos($row['Q'],",");
-                                    if ($cek_koma !== FALSE)
-                                    {$anggaran = konversi_angka($row['Q']);}
-                                    else {$anggaran = number_only($row['Q']);}
-                                    $cek_H = strlen($row['H']);
-                                    $cek_I = strlen($row['I']);
-                                    $cek_J = strlen($row['J']);
-                                    $cek_K = strlen($row['K']);
-                                    $cek_L= strlen($row['L']);
-                                    $cek_M= strlen($row['M']);
 
-                                    if ($cek_H >= 1){$uraian=$row['H'];$level=1;}
-                                    elseif ($cek_I >= 1){$uraian=$row['I'];$level=2;}
-                                    elseif ($cek_J >= 1){$uraian=$row['J'];$level=3;}
-                                    elseif ($cek_K >= 1){$uraian=$row['K'];$level=4;}
-                                    elseif ($cek_L >= 1){$uraian=$row['L'];$level=5;}
-                                    elseif ($cek_M >= 1){$uraian=$row['M'];$level=6;}
-                                    else {$uraian="";$level=7;}
+                        foreach ($sheetData as $row) {
+                            if ($numrow > 10) {
+                                if($php_versi<6){$cek_D = strlen($row['D']);}
+                                else{$cek_D = strlen($row[3]);}
+                                
+                                if ($cek_D != 0) {
+                                    if($php_versi<6){
+                                        $kode_rekening=str_replace(' ','',$row['D']);
+                                        $cek_koma=strpos($row['Q'],",");
+                                        if ($cek_koma !== FALSE)
+                                        {$anggaran = konversi_angka($row['Q']);}
+                                        else {$anggaran = number_only($row['Q']);}
+                                        $cek_H = strlen($row['H']);
+                                        $cek_I = strlen($row['I']);
+                                        $cek_J = strlen($row['J']);
+                                        $cek_K = strlen($row['K']);
+                                        $cek_L= strlen($row['L']);
+                                        $cek_M= strlen($row['M']);
+    
+                                        if ($cek_H >= 1){$uraian=$row['H'];$level=1;}
+                                        elseif ($cek_I >= 1){$uraian=$row['I'];$level=2;}
+                                        elseif ($cek_J >= 1){$uraian=$row['J'];$level=3;}
+                                        elseif ($cek_K >= 1){$uraian=$row['K'];$level=4;}
+                                        elseif ($cek_L >= 1){$uraian=$row['L'];$level=5;}
+                                        elseif ($cek_M >= 1){$uraian=$row['M'];$level=6;}
+                                        else {$uraian="";$level=7;}
+            
+                                        if ($row['H']== "BELANJA DAERAH"){$jenis=2;}
+                                        if ($row['I']== "PENERIMAAN PEMBIAYAAN"){$jenis=3;}
+                                        if ($row['I']== "PENGELUARAN PEMBIAYAAN"){$jenis=4;}
+                                    }else{
+                                        $kode_rekening=str_replace(' ','',$row[3]);
+                                        $cek_koma=strpos($row[16],",");
+                                        if ($cek_koma !== FALSE)
+                                        {$anggaran = konversi_angka($row[16]);}
+                                        else {$anggaran = number_only($row[16]);}
+                                        $cek_H = strlen($row[7]);
+                                        $cek_I = strlen($row[8]);
+                                        $cek_J = strlen($row[9]);
+                                        $cek_K = strlen($row[10]);
+                                        $cek_L= strlen($row[11]);
+                                        $cek_M= strlen($row[12]);
         
-                                    if ($row['H']== "BELANJA DAERAH"){$jenis=2;}
-                                    if ($row['I']== "PENERIMAAN PEMBIAYAAN"){$jenis=3;}
-                                    if ($row['I']== "PENGELUARAN PEMBIAYAAN"){$jenis=4;}
+                                        if ($cek_H >= 1){$uraian=$row[7];$level=1;}
+                                        elseif ($cek_I >= 1){$uraian=$row[8];$level=2;}
+                                        elseif ($cek_J >= 1){$uraian=$row[9];$level=3;}
+                                        elseif ($cek_K >= 1){$uraian=$row[10];$level=4;}
+                                        elseif ($cek_L >= 1){$uraian=$row[11];$level=5;}
+                                        elseif ($cek_M >= 1){$uraian=$row[12];$level=6;}
+                                        else {$uraian="";$level=7;}
+            
+                                        if ($row[7]== "BELANJA DAERAH"){$jenis=2;}
+                                        if ($row[8]== "PENERIMAAN PEMBIAYAAN"){$jenis=3;}
+                                        if ($row[8]== "PENGELUARAN PEMBIAYAAN"){$jenis=4;}
+                                    }
                                     
                                     $array_alokasi_skpd =  [
                                         'id_skpd' => $id_skpd,
@@ -525,6 +582,7 @@ class Skpd extends CI_Controller
                             }
                             $numrow++;
                         }
+
                         
                         $this->db->trans_complete();
                         $res = $this->db->trans_status();
@@ -546,17 +604,29 @@ class Skpd extends CI_Controller
                         $kode_rekening='';
                         $realisasi='';
                         $serapan='';
-                        foreach ($sheet as $row) {
+                        foreach ($sheetData as $row) {
                             if ($numrow > 10) {
-                                $cek_D = strlen($row['D']);
+                                if($php_versi<6){$cek_D = strlen($row['D']);}
+                                else{$cek_D = strlen($row[3]);}
                                 if ($cek_D != 0) {
-                                    $kode_rekening=$row['D'];
-                                    $row_uraian = $this->mquery->select_id('data_uraian_kegiatan_skpd', ['id_skpd' => $id_skpd, 'tahun' => $post['tahun'], 'kode_rekening' => $kode_rekening]);
-                                    $nilai_anggaran=$row_uraian['anggaran'];
-                                    $cek_koma=strpos($row['R'],",");
-                                    if ($cek_koma !== FALSE)
-                                    {$realisasi = konversi_angka($row['R']);}
-                                    else {$realisasi = number_only($row['R']);}
+                                    if($php_versi<6){
+                                        $kode_rekening=$row['D'];
+                                        $row_uraian = $this->mquery->select_id('data_uraian_kegiatan_skpd', ['id_skpd' => $id_skpd, 'tahun' => $post['tahun'], 'kode_rekening' => $kode_rekening]);
+                                        $nilai_anggaran=$row_uraian['anggaran'];
+                                        $cek_koma=strpos($row['R'],",");
+                                        if ($cek_koma !== FALSE)
+                                        {$realisasi = konversi_angka($row['R']);}
+                                        else {$realisasi = number_only($row['R']);}
+                                    }else{
+                                        $kode_rekening=$row[3];
+                                        $row_uraian = $this->mquery->select_id('data_uraian_kegiatan_skpd', ['id_skpd' => $id_skpd, 'tahun' => $post['tahun'], 'kode_rekening' => $kode_rekening]);
+                                        $nilai_anggaran=$row_uraian['anggaran'];
+                                        $cek_koma=strpos($row[17],",");
+                                        if ($cek_koma !== FALSE)
+                                        {$realisasi = konversi_angka($row[17]);}
+                                        else {$realisasi = number_only($row[17]);}
+                                    }
+
                                     if($realisasi==0){$persen=0;}
                                     else
                                     {
@@ -575,28 +645,6 @@ class Skpd extends CI_Controller
                                         'bulan' => $hsl_bulan
                                     ];
                                     $this->db->insert('data_realisasi_detail_skpd', $array_realisasi);
-                                    $cek_koma=strpos($row['T'],",");
-                                    if ($cek_koma !== FALSE)
-                                    {$serapan = konversi_angka($row['T']);}
-                                    else {$serapan = number_only($row['T']);}
-                                    if($serapan==0){$persen1=0;}
-                                    else
-                                    {
-                                        if($nilai_anggaran==0){$persen1=0;}
-                                        else{
-                                            $temp_persen1=$serapan/$nilai_anggaran*100;
-                                            $persen1=round($temp_persen1,2);
-                                        }
-                                    }
-                                    $array_serapan =  [
-                                        'id_skpd' => $id_skpd,
-                                        'kode_rekening' => $kode_rekening,
-                                        'realisasi' => $serapan,
-                                        'persen' => $persen1,
-                                        'tahun' => $post['tahun'],
-                                        'bulan' => $hsl_bulan
-                                    ];
-                                    $this->db->insert('data_serapan_skpd', $array_serapan);
                                 }
                             }
                             $numrow++;
