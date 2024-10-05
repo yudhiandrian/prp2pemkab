@@ -168,10 +168,9 @@ class Grafik_model extends CI_Model {
             $total_row_real_belanja=0;
             $total_row_real_pad1=0;
             foreach ($result_get_skpd as $sg) {
-                // $this->db->select_sum('realisasi');
-                // $this->db->where(['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23, 'kode_rekening' => '4']);
-                // $row_real_pendapatan = $this->db->get('data_realisasi_detail_skpd')->row_array();
-                $row_real_pendapatan = $this->mquery->select_id('data_realisasi_detail_skpd', ['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23, 'kode_rekening' => 4]);
+                $this->db->select_sum('realisasi');
+                $this->db->where(['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23, 'kode_rekening' => 4]);
+                $row_real_pendapatan = $this->db->get('data_realisasi_detail_skpd')->row_array();
 
                 $this->db->select_sum('realisasi');
                 $this->db->where(['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23, 'kode_rekening' => '5']);
@@ -192,10 +191,10 @@ class Grafik_model extends CI_Model {
                     if($row_real_pendapatan['realisasi']==0)
                     {
                         $i23_1=$i23-1;
-                        // $this->db->select_sum('realisasi');
-                        // $this->db->where(['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23_1, 'kode_rekening' => '4']);
-                        // $row_real_pendapatan_1 = $this->db->get('data_realisasi_detail_skpd')->row_array();
-                        $row_real_pendapatan_1 =$this->mquery->select_id('data_realisasi_detail_skpd', ['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23_1, 'kode_rekening' => 4]);
+                        $this->db->select_sum('realisasi');
+                        $this->db->where(['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23_1, 'kode_rekening' => 4]);
+                        $row_real_pendapatan_1 = $this->db->get('data_realisasi_detail_skpd')->row_array();
+                        //$row_real_pendapatan_1 =$this->mquery->select_id('data_realisasi_detail_skpd', ['id_skpd' => $sg['id_skpd'], 'tahun' => $tahun, 'bulan' => $i23_1, 'kode_rekening' => 4]);
                         $temp_row_real_pendapatan=$row_real_pendapatan_1['realisasi'];
 
                     }

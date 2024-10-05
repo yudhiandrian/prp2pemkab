@@ -49,6 +49,7 @@ class Skpd extends CI_Controller
             foreach ($result as $r) {
                 $encrypt_id = encrypt_url($r['id_skpd']);
                 $result_realisasi = 0;
+
                 $cek = $this->mquery->count_data('log_upload', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'st_data' => 2]);
                 if($cek==0){
                     $total_pendapatan=0;
@@ -83,15 +84,18 @@ class Skpd extends CI_Controller
                         $cek_papbd = $this->mquery->select_id('setting_anggaran', ['tahun' => $tahun]);
                         $tgl_papbd=$cek_papbd['papbd'];
                         $tanggal_data=$row_log_upload['tgl_data'];
-                        
+    
                         if($tanggal_data<$tgl_papbd){$hsl_stanggaran=1;}
                         else{$hsl_stanggaran=2;}
-
-                        $row_data_uraian_belanja = $this->mquery->sum_data('data_uraian_kegiatan_skpd', 'anggaran', ['id_skpd' => $r['id_skpd'], 'kode_rekening' => 5,'st_anggaran' => $hsl_stanggaran, 'tahun' => $tahun]);
+    
+                        $row_data_uraian_belanja = $this->mquery->select_id('data_uraian_kegiatan_skpd', ['id_skpd' => $r['id_skpd'], 'kode_rekening' => 5,'st_anggaran' => $hsl_stanggaran, 'tahun' => $tahun]);
                         $total_belanja=$row_data_uraian_belanja['anggaran'];
-                        $row_data_uraian_pendapatan = $this->mquery->sum_data('data_uraian_kegiatan_skpd', 'anggaran', ['id_skpd' => $r['id_skpd'], 'kode_rekening' => 4,'st_anggaran' => $hsl_stanggaran, 'tahun' => $tahun]);
+                        $row_data_uraian_pendapatan = $this->mquery->select_id('data_uraian_kegiatan_skpd', ['id_skpd' => $r['id_skpd'], 'kode_rekening' => 4,'st_anggaran' => $hsl_stanggaran, 'tahun' => $tahun]);
                         $total_pendapatan=$row_data_uraian_pendapatan['anggaran'];
-
+                        
+                        // $row_realisasi_pendapatan = $this->mquery->select_id('data_realisasi_detail_skpd', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $result_max['bulan'], 'kode_rekening' => 4]);
+                        // $row_realisasi_belanja = $this->mquery->select_id('data_realisasi_detail_skpd', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $result_max['bulan'], 'kode_rekening' => 5]);
+                    
                         $row_realisasi_pendapatan = $this->mquery->sum_data('tbl_realisasi_skpd', 'realisasi', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'kode_rekening' => 4]);
                         $row_realisasi_belanja = $this->mquery->sum_data('tbl_realisasi_skpd', 'realisasi', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'kode_rekening' => 5]);
                         
@@ -105,6 +109,7 @@ class Skpd extends CI_Controller
                         else{$persen_total_pendapatan = round(($hsl_realisasi_pendapatan / $total_pendapatan * 100), 2);}
                     }
                 }
+                
 
                 $tampil_pendapatan = "<table class='table-detail' style='width:100%;'>
                     <tr><td>Anggaran</td><td style='text-align:right; font-weight:bold;'>Rp" . format_rupiah($total_pendapatan) . "</td></tr>

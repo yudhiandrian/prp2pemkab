@@ -34,14 +34,15 @@ class Kegiatan extends CI_Controller
             $tahun = $this->input->post('tahun');
             if ($this->user['is_skpd'] == 'Y') {
                 $user = $this->mquery->select_id('users', ['id_user' => $this->user['user']]);
-                $result = $this->mquery->select_by("data_skpd", ['id_skpd'=>$user['id_skpd']]);
+                $result = $this->mquery->select_by("data_skpd_tahun", ['tahun' => $tahun, 'id_skpd'=>$user['id_skpd']]);
             } else {
-                $result = $this->mquery->select_data("data_skpd", "id_skpd ASC");
+                $result = $this->mquery->select_by("data_skpd_tahun", ['tahun' => $tahun], "id_skpd ASC");
             }
             $data = [];
             $no = 0;
             foreach ($result as $r) {
                 $encrypt_id = encrypt_url($r['id_skpd']);
+                $skpd = $this->mquery->select_id('users', ['id_user' => $this->user['user']]);
                 $jumlah_kegiatan = $this->mquery->count_data('ta_kontrak', ['kd_urusan' => $r['kd_urusan'], 'kd_bidang' => $r['kd_bidang'], 'kd_unit' => $r['kd_unit'], 'kd_sub' => $r['kd_sub'], 'tahun'=> $tahun]);
                 $berkontrak = $this->mquery->count_data('ta_kontrak', ['kd_urusan' => $r['kd_urusan'], 'kd_bidang' => $r['kd_bidang'], 'kd_unit' => $r['kd_unit'], 'kd_sub' => $r['kd_sub'], 'tahun'=> $tahun, 'nilai!='=> 0]);
                 $belum_mulai = $this->mquery->count_data('ta_kontrak', ['kd_urusan' => $r['kd_urusan'], 'kd_bidang' => $r['kd_bidang'], 'kd_unit' => $r['kd_unit'], 'kd_sub' => $r['kd_sub'], 'tahun'=> $tahun, 'nilai!='=> 0, 'realisasi_fisik'=> 0]);
