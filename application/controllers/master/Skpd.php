@@ -45,6 +45,17 @@ class Skpd extends CI_Controller
                 else{$delete = "-";}
 
                // $nama_skpd = "<a href=" . base_url("data-skpd/detail/" . $r['id_skpd']) . "><h2>" . $r['nama_skpd'] . "</h2></a>";
+                if($r['kd_urusan']==0){
+                    $result_max = $this->mquery->max_data("data_skpd", "kd_urusan");
+                    $max_p1 = $result_max['kd_urusan']+1;
+                    $array_input =  [
+                        'kd_urusan' => $max_p1,
+                        'kd_bidang' => 1,
+                        'kd_unit' => 1,
+                        'kd_sub' => 1
+                    ];
+                    $this->db->update("data_skpd", $array_input, ['id_skpd' => $r['id_skpd']]);
+                }
                 $nama_skpd=$r['nama_skpd'];
                 $row = [
                     'no' => $no,

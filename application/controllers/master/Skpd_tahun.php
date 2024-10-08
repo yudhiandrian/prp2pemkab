@@ -47,6 +47,17 @@ class Skpd_tahun extends CI_Controller
                     }
                 else{$delete = "-";}
 
+                if($r['kd_urusan']==0){
+                    $data_skpd = $this->mquery->select_id("data_skpd", ['id_skpd' => $r['id_skpd']]);
+                    $array_input =  [
+                        'kd_urusan' => $data_skpd['kd_urusan'],
+                        'kd_bidang' => $data_skpd['kd_bidang'],
+                        'kd_unit' => $data_skpd['kd_unit'],
+                        'kd_sub' => $data_skpd['kd_sub']
+                    ];
+                    $this->db->update("data_skpd_tahun", $array_input, ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun]);
+                }
+
                 $row = [
                     'no' => $no,
                     'nama_skpd' => $r['nama_skpd'],
