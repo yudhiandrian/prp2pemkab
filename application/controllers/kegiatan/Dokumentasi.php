@@ -23,29 +23,12 @@ class Dokumentasi extends CI_Controller
                 $kontrak_pa = $this->mquery->select_id('ta_kontrak_pa', ['id_kontrak' => $detail['id_kegiatan']]);
                 $nama_pa=$kontrak_pa['nama_pa'];
             }
-        
-        $no_kontrak=$ta_kontrak['no_kontrak'];
-        $spp_kontrak = $this->mquery->select_id('ta_spp_kontrak', ['no_kontrak' => $no_kontrak]);
-        $no_spp=$spp_kontrak['no_spp'];
-        $hit_spp_rinc = $this->mquery->count_data('ta_spp_rinc', ['no_spp' => $no_spp]);
-        if($hit_spp_rinc==0){$realisasi=0;}
-        {
-            $sum_spp_rinc = $this->mquery->sum_data('ta_spp_rinc', 'nilai', ['no_spp' => $no_spp]);
-            $realisasi=$sum_spp_rinc['nilai'];
-        }
-
-        if($ta_kontrak['nilai']==0){$persen_real=0;}
-        else{
-            $persen_real=hitung_persen($realisasi, $ta_kontrak['nilai'], 2);
-        }
 
         $data = [
             "menu_active" => "kegiatan_skpd",
             "submenu_active" => null,
             "detail" => $detail,
             "nama_pa" => $nama_pa,
-            "realisasi" => $realisasi,
-            "persen_real" => $persen_real,
             "ta_kontrak" => $ta_kontrak,
             "skpd" => $skpd
 

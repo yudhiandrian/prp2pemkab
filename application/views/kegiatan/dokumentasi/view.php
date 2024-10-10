@@ -62,24 +62,9 @@
                                         <td><?=$ta_kontrak['nm_perusahaan'];?></td>
                                     </tr>
                                     <tr>
-                                        <td>Realisasi Keuangan</td>
-                                        <td>:</td>
-                                        <td><?='Rp ' . format_rupiah($realisasi)?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Persen Keuangan (%)</td>
-                                        <td>:</td>
-                                        <td><?=number_format($persen_real,1)?> %</td>
-                                    </tr>
-                                    <tr>
                                         <td>Tahapan/Tanggal</td>
                                         <td>:</td>
                                         <td><?=tipe_jadwal($detail['jenis_target']) . ' ke-' . $detail['tahapan_target'] . '<br>' . format_tanggal($detail['jadwal_target'])?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Persen Fisik (%)</td>
-                                        <td>:</td>
-                                        <td><?=number_format($detail['realisasi'],1)?> %</td>
                                     </tr>
                                 </table>
                             </div>

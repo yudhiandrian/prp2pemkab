@@ -13,7 +13,14 @@ class Laporan_fisik extends CI_Controller
 
     public function index()
     {
-        $jml_keg_all = $this->mquery->count_data('ta_kontrak', ['tahun' => 2021]);
+        if ($this->user['is_skpd'] == 'Y') {
+            $user = $this->mquery->select_id('users', ['id_user' => $this->user['user']]);
+            $skpd = $this->mquery->select_id('data_skpd', ['id_skpd' => $user['id_skpd']]);
+            $jml_keg_all = $this->mquery->count_data('ta_kontrak', ['tahun' => date('Y'), 'kd_urusan' => $skpd['kd_urusan'],'kd_bidang' => $skpd['kd_bidang'],'kd_unit' => $skpd['kd_unit'],'kd_sub' => $skpd['kd_sub']]);
+        } else {
+            $jml_keg_all = $this->mquery->count_data('ta_kontrak', ['tahun' => date('Y')]);
+        }
+        
         $data = [
             "menu_active" => "laporan",
             "submenu_active" => "laporan-realisasi-fisik",
