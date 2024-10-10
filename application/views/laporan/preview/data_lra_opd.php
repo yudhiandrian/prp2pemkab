@@ -7,9 +7,13 @@
     $this->user = is_logged_in();
     $user = $this->mquery->select_id('users', ['id_user' => $this->user['user']]);
     $row_skpd_tahun = $this->mquery->select_id("data_skpd_tahun", ['id_skpd'=>$user['id_skpd'], 'tahun'=>$tahun]);
-    $row_penanda_tangan = $this->mquery->select_id("penanda_tangan", ['id_skpd'=>$row_skpd_tahun['id_skpd'], 'is_active'=>'Y']);
-    $nama_ttd=$row_penanda_tangan['nama_ttd'];
-    $nip_ttd=$row_penanda_tangan['nip_ttd'];
+
+    $jml_data = $this->mquery->count_data('penanda_tangan', ['id_skpd'=>$row_skpd_tahun['id_skpd'], 'is_active'=>'Y']);
+    if($jml_data==0){ $nama_ttd = ""; $nip_ttd = "";}else{
+        $row_penanda_tangan = $this->mquery->select_id("penanda_tangan", ['id_skpd'=>$row_skpd_tahun['id_skpd'], 'is_active'=>'Y']);
+        $nama_ttd=$row_penanda_tangan['nama_ttd'];
+        $nip_ttd=$row_penanda_tangan['nip_ttd'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

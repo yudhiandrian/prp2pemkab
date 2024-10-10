@@ -11,9 +11,10 @@ class Laporan_keuangan extends CI_Controller
         $this->akses = is_logged_in();
     }
 
-    public function preview($encrypt_id, $bulan)
+    public function preview($encrypt_id, $bulan=null)
     {
         $id_skpd = decrypt_url($encrypt_id);
+        if($bulan==null){$bulan=date('m');}
         $row_log_upload = $this->mquery->select_id('log_upload', ['id_skpd' => $id_skpd, 'tahun' => 2021, 'bulan' => $bulan, 'st_data' => 2]);
         $skpd = $this->mquery->select_id('data_skpd', ['id_skpd' => $id_skpd]);
         $row_laporan = $this->mquery->select_id('laporan_realisasi_keuangan', ['id_skpd' => $id_skpd, 'tahun' => 2021, 'bulan' => $bulan]);

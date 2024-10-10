@@ -89,7 +89,11 @@ class Skpd_rekap extends CI_Controller
             if($anggaran_pendapatan==0){$persen_total_pendapatan_all=0;}
             else{$persen_total_pendapatan_all = round(($realisasi_pendapatan_all / $anggaran_pendapatan * 100), 2);}
 
-            $nama_kabupaten = "<a href=" . base_url("upload-lra-opd/detail_rekap/".$tahun."/".$bulan_max) . "><h2>".$nama_kabupaten."</h2></a>";
+            if ($this->user['is_skpd'] == 'Y') {
+                $nama_kabupaten = $nama_kabupaten;
+            } else {
+                $nama_kabupaten = "<a href=" . base_url("upload-lra-opd/detail_rekap/".$tahun."/".$bulan_max) . "><h2>".$nama_kabupaten."</h2></a>";
+            }
             
             $keterangan = "<table class='table-detail' style='width:100%; text-align:center; font-weight:bold;'>
                     <tr>
@@ -228,13 +232,18 @@ class Skpd_rekap extends CI_Controller
 
     public function detail_rekap2($tahun, $bulan)
     {
-        $row_log_upload = $this->mquery->select_id('log_upload', ['tahun' => $tahun, 'bulan' => $bulan, 'st_data' => 2]);
+        $cek_jml = $this->mquery->count_data('log_upload', ['tahun' => $tahun, 'bulan' => $bulan, 'st_data' => 2]);
+        if($cek_jml==0){$nama_periode = "";}else{
+            $row_log_upload = $this->mquery->select_id('log_upload', ['tahun' => $tahun, 'bulan' => $bulan, 'st_data' => 2]);
+            $nama_periode = $this->fungsi->nama_bulan($row_log_upload['tgl_data']);
+        }
+        
         $data = [
             "menu_active" => "upload_data",
             "submenu_active" => "upload-lra-opd",
             "tahun" => $tahun,
             "bulan" => $bulan,
-            "nama_periode" => $this->fungsi->nama_bulan($row_log_upload['tgl_data'])
+            "nama_periode" => $nama_periode
         ];
         $this->load->view('upload_lra/skpd/view_detail_rekap2', $data);
     }
