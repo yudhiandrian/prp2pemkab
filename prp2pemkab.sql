@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Okt 2024 pada 05.40
+-- Waktu pembuatan: 18 Jun 2025 pada 05.34
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 5.6.40
 
@@ -35,6 +35,24 @@ CREATE TABLE `anggarankas_detail` (
   `nilai` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `anggarankas_detail`
+--
+
+INSERT INTO `anggarankas_detail` (`id_skpd`, `tahun`, `bulan`, `nilai`) VALUES
+(54, 2024, 1, 41897000),
+(54, 2024, 2, 40897000),
+(54, 2024, 3, 40897000),
+(54, 2024, 4, 40897000),
+(54, 2024, 5, 40897000),
+(54, 2024, 6, 40897000),
+(54, 2024, 7, 40897000),
+(54, 2024, 8, 40897000),
+(54, 2024, 9, 40897000),
+(54, 2024, 10, 40897000),
+(54, 2024, 11, 40897000),
+(54, 2024, 12, 40897453);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +65,13 @@ CREATE TABLE `anggaran_kas` (
   `nilai` double NOT NULL,
   `namafile` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `anggaran_kas`
+--
+
+INSERT INTO `anggaran_kas` (`id_skpd`, `tahun`, `nilai`, `namafile`) VALUES
+(54, 2024, 0, 'anggaran_kas_54_20241002-133043.xlsx');
 
 -- --------------------------------------------------------
 
@@ -128,6 +153,15 @@ CREATE TABLE `data_kegiatan_detail` (
   `user_input` int(11) NOT NULL,
   `tgl_input` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `data_kegiatan_detail`
+--
+
+INSERT INTO `data_kegiatan_detail` (`id_kegiatan_detail`, `id_kegiatan`, `jenis_target`, `tahapan_target`, `jadwal_target`, `target`, `target_keuangan`, `realisasi`, `realisasi_keuangan`, `keterangan_target`, `user_input`, `tgl_input`) VALUES
+(2, 0, '', 0, '0000-00-00', 0, 0, 0, 0, 'KETERANGAN', 1, '2024-10-02 16:27:49'),
+(3, 0, '', 0, '0000-00-00', 0, 0, 0, 0, 'KETERANGAN', 1, '2024-10-02 16:27:52'),
+(4, 11, 'H', 1, '2024-10-16', 100, 0, 100, 0, '', 175, '2024-10-10 07:59:59');
 
 -- --------------------------------------------------------
 
@@ -213,6 +247,14 @@ CREATE TABLE `data_kontrak_real` (
   `tgl_realisasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `data_kontrak_real`
+--
+
+INSERT INTO `data_kontrak_real` (`id_real`, `tahun`, `id_kontrak`, `no_kontrak`, `nilai`, `kd_urusan`, `kd_bidang`, `kd_unit`, `kd_sub`, `kd_keg`, `keterangan`, `tgl_realisasi`) VALUES
+(1, 2024, 0, '', 0, 0, 0, 0, 0, 38, 'KETERANGAN', '0000-00-00'),
+(2, 2024, 0, '', 0, 0, 0, 0, 0, 38, 'KETERANGAN', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -228,6 +270,30 @@ CREATE TABLE `data_realisasi_detail_skpd` (
   `tahun` int(11) NOT NULL,
   `bulan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `data_realisasi_detail_skpd`
+--
+
+INSERT INTO `data_realisasi_detail_skpd` (`id_realisasi`, `id_skpd`, `kode_rekening`, `realisasi`, `persen`, `tahun`, `bulan`) VALUES
+(208, 55, '4', 0, 0, 2024, 10),
+(209, 55, '4.1', 0, 0, 2024, 10),
+(210, 55, '4.2', 0, 0, 2024, 10),
+(211, 55, '4.3', 0, 0, 2024, 10),
+(212, 55, '5', 0, 0, 2024, 10),
+(213, 55, '5.1', 0, 0, 2024, 10),
+(214, 55, '5.2', 0, 0, 2024, 10),
+(215, 55, '5.3', 0, 0, 2024, 10),
+(216, 55, '5.4', 0, 0, 2024, 10),
+(235, 54, '4', 10000000, 50, 2024, 10),
+(236, 54, '4.1', 10000000, 50, 2024, 10),
+(237, 54, '4.2', 0, 0, 2024, 10),
+(238, 54, '4.3', 0, 0, 2024, 10),
+(239, 54, '5', 30000000, 60, 2024, 10),
+(240, 54, '5.1', 30000000, 60, 2024, 10),
+(241, 54, '5.2', 0, 0, 2024, 10),
+(242, 54, '5.3', 0, 0, 2024, 10),
+(243, 54, '5.4', 0, 0, 2024, 10);
 
 -- --------------------------------------------------------
 
@@ -634,7 +700,16 @@ INSERT INTO `data_serapan_skpd` (`id_serapan`, `id_skpd`, `kode_rekening`, `real
 (465, 38, '5.1', 0, 0, 2024, 2),
 (466, 38, '5.2', 0, 0, 2024, 2),
 (467, 38, '5.3', 0, 0, 2024, 2),
-(468, 38, '5.4', 0, 0, 2024, 2);
+(468, 38, '5.4', 0, 0, 2024, 2),
+(523, 54, '4', 0, 0, 2024, 9),
+(524, 54, '4.1', 0, 0, 2024, 9),
+(525, 54, '4.2', 0, 0, 2024, 9),
+(526, 54, '4.3', 0, 0, 2024, 9),
+(527, 54, '5', 0, 0, 2024, 9),
+(528, 54, '5.1', 0, 0, 2024, 9),
+(529, 54, '5.2', 0, 0, 2024, 9),
+(530, 54, '5.3', 0, 0, 2024, 9),
+(531, 54, '5.4', 0, 0, 2024, 9);
 
 -- --------------------------------------------------------
 
@@ -690,46 +765,46 @@ INSERT INTO `data_skpd` (`id_skpd`, `nama_skpd`, `pendapatan`, `belanja`, `st_pe
 (74, 'DINAS PERPUSTAKAAN DAN ARSIP', 0, 0, 0, 0, 0, 21, 1, 1, 1, 0, 0, 0, 0),
 (75, 'DINAS PERTANIAN', 0, 0, 0, 0, 0, 22, 1, 1, 1, 0, 0, 0, 0),
 (76, 'DINAS PERINDUSTRIAN DAN PERDAGANGAN', 0, 0, 0, 0, 0, 23, 1, 1, 1, 0, 0, 0, 0),
-(88, 'BADAN PERENCANAAN PEMBANGUNAN, RISET DAN INOVASI DAERAH', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(89, 'BADAN KEPEGAWAIAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(90, 'BADAN PENGELOLAAN KEUANGAN DAN PENDAPATAN DAERAH', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(91, 'BADAN PENANGGULANGAN BENCANA DAERAH', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(93, 'BADAN KESATUAN BANGSA DAN POLITIK', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(94, 'RUMAH SAKIT UMUM DAERAH RONDAHAIM', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(95, 'RUMAH SAKIT UMUM DAERAH PERDAGANGAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(96, 'RUMAH SAKIT UMUM DAERAH PARAPAT', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(97, 'KECAMATAN SIANTAR', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(98, 'KECAMATAN GUNUNG MALELA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(99, 'KECAMATAN GUNUNG MALIGAS', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(100, 'KECAMATAN PEMATANG BANDAR', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(101, 'KECAMATAN UJUNG PADANG', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(102, 'KECAMATAN BANDAR HULUAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(103, 'KECAMATAN TAPIAN DOLOK', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(104, 'KECAMATAN HATONDUHAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(105, 'KECAMATAN HUTA BAYU RAJA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(106, 'KECAMATAN JAWA MARAJA BAH JAMBI', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(107, 'KECAMATAN JORLANG HATARAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(108, 'KECAMATAN DOLOK PANRIBUAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(109, 'KECAMATAN GIRSANG SIPANGAN BOLON', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(110, 'KECAMATAN RAYA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(111, 'KECAMATAN PURBA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(112, 'KECAMATAN HARANGGAOL HORISON', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(113, 'KECAMATAN DOLOK SILAU', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(114, 'KECAMATAN PANOMBEIAN PANEI', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(115, 'KECAMATAN BANDAR', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(116, 'KECAMATAN BANDAR MASILAM', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(117, 'KECAMATAN DOLOK BATU NANGGAR', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(118, 'KECAMATAN RAYA KAHEAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(119, 'KECAMATAN PAMATANG SILIMAHUTA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(120, 'KECAMATAN SILIMAKUTA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(121, 'KECAMATAN SIDAMANIK', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(122, 'KECAMATAN DOLOK PARDAMEAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(123, 'KECAMATAN PANEI', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(124, 'KECAMATAN BOSAR MALIGAS', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(125, 'KECAMATAN TANAH JAWA', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(126, 'KECAMATAN PAMATANG SIDAMANIK', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(127, 'KECAMATAN DOLOK MASAGAL', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(128, 'KECAMATAN SILOU KAHEAN', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(88, 'BADAN PERENCANAAN PEMBANGUNAN, RISET DAN INOVASI DAERAH', 0, 0, 0, 0, 0, 24, 1, 1, 1, 0, 0, 0, 0),
+(89, 'BADAN KEPEGAWAIAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA', 0, 0, 0, 0, 0, 25, 1, 1, 1, 0, 0, 0, 0),
+(90, 'BADAN PENGELOLAAN KEUANGAN DAN PENDAPATAN DAERAH', 0, 0, 0, 0, 0, 26, 1, 1, 1, 0, 0, 0, 0),
+(91, 'BADAN PENANGGULANGAN BENCANA DAERAH', 0, 0, 0, 0, 0, 27, 1, 1, 1, 0, 0, 0, 0),
+(93, 'BADAN KESATUAN BANGSA DAN POLITIK', 0, 0, 0, 0, 0, 28, 1, 1, 1, 0, 0, 0, 0),
+(94, 'RUMAH SAKIT UMUM DAERAH RONDAHAIM', 0, 0, 0, 0, 0, 29, 1, 1, 1, 0, 0, 0, 0),
+(95, 'RUMAH SAKIT UMUM DAERAH PERDAGANGAN', 0, 0, 0, 0, 0, 30, 1, 1, 1, 0, 0, 0, 0),
+(96, 'RUMAH SAKIT UMUM DAERAH PARAPAT', 0, 0, 0, 0, 0, 31, 1, 1, 1, 0, 0, 0, 0),
+(97, 'KECAMATAN SIANTAR', 0, 0, 0, 0, 0, 32, 1, 1, 1, 0, 0, 0, 0),
+(98, 'KECAMATAN GUNUNG MALELA', 0, 0, 0, 0, 0, 33, 1, 1, 1, 0, 0, 0, 0),
+(99, 'KECAMATAN GUNUNG MALIGAS', 0, 0, 0, 0, 0, 34, 1, 1, 1, 0, 0, 0, 0),
+(100, 'KECAMATAN PEMATANG BANDAR', 0, 0, 0, 0, 0, 35, 1, 1, 1, 0, 0, 0, 0),
+(101, 'KECAMATAN UJUNG PADANG', 0, 0, 0, 0, 0, 36, 1, 1, 1, 0, 0, 0, 0),
+(102, 'KECAMATAN BANDAR HULUAN', 0, 0, 0, 0, 0, 37, 1, 1, 1, 0, 0, 0, 0),
+(103, 'KECAMATAN TAPIAN DOLOK', 0, 0, 0, 0, 0, 38, 1, 1, 1, 0, 0, 0, 0),
+(104, 'KECAMATAN HATONDUHAN', 0, 0, 0, 0, 0, 39, 1, 1, 1, 0, 0, 0, 0),
+(105, 'KECAMATAN HUTA BAYU RAJA', 0, 0, 0, 0, 0, 40, 1, 1, 1, 0, 0, 0, 0),
+(106, 'KECAMATAN JAWA MARAJA BAH JAMBI', 0, 0, 0, 0, 0, 41, 1, 1, 1, 0, 0, 0, 0),
+(107, 'KECAMATAN JORLANG HATARAN', 0, 0, 0, 0, 0, 42, 1, 1, 1, 0, 0, 0, 0),
+(108, 'KECAMATAN DOLOK PANRIBUAN', 0, 0, 0, 0, 0, 43, 1, 1, 1, 0, 0, 0, 0),
+(109, 'KECAMATAN GIRSANG SIPANGAN BOLON', 0, 0, 0, 0, 0, 44, 1, 1, 1, 0, 0, 0, 0),
+(110, 'KECAMATAN RAYA', 0, 0, 0, 0, 0, 45, 1, 1, 1, 0, 0, 0, 0),
+(111, 'KECAMATAN PURBA', 0, 0, 0, 0, 0, 46, 1, 1, 1, 0, 0, 0, 0),
+(112, 'KECAMATAN HARANGGAOL HORISON', 0, 0, 0, 0, 0, 47, 1, 1, 1, 0, 0, 0, 0),
+(113, 'KECAMATAN DOLOK SILAU', 0, 0, 0, 0, 0, 48, 1, 1, 1, 0, 0, 0, 0),
+(114, 'KECAMATAN PANOMBEIAN PANEI', 0, 0, 0, 0, 0, 49, 1, 1, 1, 0, 0, 0, 0),
+(115, 'KECAMATAN BANDAR', 0, 0, 0, 0, 0, 50, 1, 1, 1, 0, 0, 0, 0),
+(116, 'KECAMATAN BANDAR MASILAM', 0, 0, 0, 0, 0, 51, 1, 1, 1, 0, 0, 0, 0),
+(117, 'KECAMATAN DOLOK BATU NANGGAR', 0, 0, 0, 0, 0, 52, 1, 1, 1, 0, 0, 0, 0),
+(118, 'KECAMATAN RAYA KAHEAN', 0, 0, 0, 0, 0, 53, 1, 1, 1, 0, 0, 0, 0),
+(119, 'KECAMATAN PAMATANG SILIMAHUTA', 0, 0, 0, 0, 0, 54, 1, 1, 1, 0, 0, 0, 0),
+(120, 'KECAMATAN SILIMAKUTA', 0, 0, 0, 0, 0, 55, 1, 1, 1, 0, 0, 0, 0),
+(121, 'KECAMATAN SIDAMANIK', 0, 0, 0, 0, 0, 56, 1, 1, 1, 0, 0, 0, 0),
+(122, 'KECAMATAN DOLOK PARDAMEAN', 0, 0, 0, 0, 0, 57, 1, 1, 1, 0, 0, 0, 0),
+(123, 'KECAMATAN PANEI', 0, 0, 0, 0, 0, 58, 1, 1, 1, 0, 0, 0, 0),
+(124, 'KECAMATAN BOSAR MALIGAS', 0, 0, 0, 0, 0, 59, 1, 1, 1, 0, 0, 0, 0),
+(125, 'KECAMATAN TANAH JAWA', 0, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0),
+(126, 'KECAMATAN PAMATANG SIDAMANIK', 0, 0, 0, 0, 0, 61, 1, 1, 1, 0, 0, 0, 0),
+(127, 'KECAMATAN DOLOK MASAGAL', 0, 0, 0, 0, 0, 62, 1, 1, 1, 0, 0, 0, 0),
+(128, 'KECAMATAN SILOU KAHEAN', 0, 0, 0, 0, 0, 63, 1, 1, 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -763,10 +838,12 @@ INSERT INTO `data_skpd_rekap` (`id_skpd`, `tahun`, `nilai`, `realisasi`, `persen
 (73, 2023, 0, 0, 0, 0, 0),
 (75, 2023, 0, 0, 0, 0, 0),
 (53, 2023, 0, 0, 0, 0, 0),
-(54, 2024, 38149196000, 0, 0, 0, 0),
-(38, 2024, 0, 0, 0, 0, 0),
+(54, 2024, 99000000, 0, 0, 100, 1),
+(38, 2024, 300000000, 0, 0, 0, 0),
 (52, 2024, 0, 0, 0, 0, 0),
-(53, 2024, 100000000, 0, 0, 0, 0);
+(53, 2024, 100000000, 0, 0, 0, 0),
+(38, 2025, 0, 0, 0, 0, 0),
+(52, 2025, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -788,6 +865,20 @@ CREATE TABLE `data_skpd_tahun` (
   `jml_input` int(11) NOT NULL,
   `tahun` int(11) NOT NULL DEFAULT '2023'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `data_skpd_tahun`
+--
+
+INSERT INTO `data_skpd_tahun` (`id_data`, `id_skpd`, `nama_skpd`, `kd_urusan`, `kd_bidang`, `kd_unit`, `kd_sub`, `realisasi`, `persen_realisasi`, `persen_fisik`, `jml_input`, `tahun`) VALUES
+(1, 54, 'DINAS PENDIDIKAN', 3, 1, 1, 1, 0, 0, 0, 0, 2024),
+(2, 55, 'DINAS KESEHATAN', 4, 1, 1, 1, 0, 0, 0, 0, 2024),
+(3, 38, 'SEKRETARIAT DAERAH', 1, 1, 1, 1, 0, 0, 0, 0, 2025),
+(4, 52, 'SEKRETARIAT DPRD', 2, 1, 1, 1, 0, 0, 0, 0, 2025),
+(5, 53, 'INSPEKTORAT DAERAH', 2, 1, 1, 2, 0, 0, 0, 0, 2025),
+(6, 54, 'DINAS PENDIDIKAN', 3, 1, 1, 1, 0, 0, 0, 0, 2025),
+(7, 55, 'DINAS KESEHATAN', 4, 1, 1, 1, 0, 0, 0, 0, 2025),
+(8, 57, 'DINAS PEKERJAAN UMUM DAN TATA RUANG', 5, 1, 1, 1, 0, 0, 0, 0, 2025);
 
 -- --------------------------------------------------------
 
@@ -2704,6 +2795,55 @@ CREATE TABLE `data_uraian_kegiatan_skpd` (
   `is_transfer` enum('Y','N') NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `data_uraian_kegiatan_skpd`
+--
+
+INSERT INTO `data_uraian_kegiatan_skpd` (`id_uraian`, `id_skpd`, `kode_rekening`, `level`, `tahun`, `anggaran`, `jenis`, `st_anggaran`, `is_transfer`) VALUES
+(1, 54, '4', 1, 2024, 20000000, 1, 1, 'N'),
+(2, 54, '4.1', 2, 2024, 20000000, 1, 1, 'N'),
+(3, 54, '4.2', 2, 2024, 0, 1, 1, 'N'),
+(4, 54, '4.3', 2, 2024, 0, 1, 1, 'N'),
+(5, 54, '5', 1, 2024, 50000000, 2, 1, 'N'),
+(6, 54, '5.1', 2, 2024, 50000000, 2, 1, 'N'),
+(7, 54, '5.2', 2, 2024, 0, 2, 1, 'N'),
+(8, 54, '5.3', 2, 2024, 0, 2, 1, 'N'),
+(9, 54, '5.4', 2, 2024, 0, 2, 1, 'N'),
+(10, 54, '50', 1, 2024, 0, 1, 1, 'N'),
+(11, 54, '11', 1, 2024, 0, 1, 1, 'N'),
+(12, 54, '30', 1, 2024, 0, 1, 1, 'N'),
+(13, 54, '33', 1, 2024, 0, 1, 1, 'N'),
+(14, 54, '9', 1, 2024, 0, 1, 1, 'N'),
+(15, 54, '125', 1, 2024, 0, 1, 1, 'N'),
+(16, 54, '38', 1, 2024, 0, 1, 1, 'N'),
+(17, 54, '23', 1, 2024, 0, 1, 1, 'N'),
+(18, 54, '49', 1, 2024, 0, 1, 1, 'N'),
+(19, 54, '12', 1, 2024, 0, 1, 1, 'N'),
+(20, 54, '7', 1, 2024, 0, 1, 1, 'N'),
+(21, 54, '87', 1, 2024, 0, 1, 1, 'N'),
+(22, 54, '16', 1, 2024, 0, 1, 1, 'N'),
+(23, 54, '170', 1, 2024, 0, 1, 1, 'N'),
+(24, 54, '31', 1, 2024, 0, 1, 1, 'N'),
+(25, 54, '17', 1, 2024, 0, 1, 1, 'N'),
+(26, 54, '76', 1, 2024, 0, 1, 1, 'N'),
+(27, 54, '142', 1, 2024, 0, 1, 1, 'N'),
+(28, 54, '19', 1, 2024, 0, 1, 1, 'N'),
+(29, 54, '336', 1, 2024, 0, 1, 1, 'N'),
+(30, 54, '532', 1, 2024, 0, 1, 1, 'N'),
+(31, 54, '0', 1, 2024, 0, 2, 1, 'N'),
+(32, 54, '1', 1, 2024, 0, 2, 1, 'N'),
+(33, 54, '110', 1, 2024, 0, 2, 1, 'N'),
+(34, 54, '290', 1, 2024, 0, 2, 1, 'N'),
+(35, 55, '4', 1, 2024, 20000000, 1, 1, 'N'),
+(36, 55, '4.1', 2, 2024, 20000000, 1, 1, 'N'),
+(37, 55, '4.2', 2, 2024, 0, 1, 1, 'N'),
+(38, 55, '4.3', 2, 2024, 0, 1, 1, 'N'),
+(39, 55, '5', 1, 2024, 307000000, 2, 1, 'N'),
+(40, 55, '5.1', 2, 2024, 300000000, 2, 1, 'N'),
+(41, 55, '5.2', 2, 2024, 3000000, 2, 1, 'N'),
+(42, 55, '5.3', 2, 2024, 4000000, 2, 1, 'N'),
+(43, 55, '5.4', 2, 2024, 0, 2, 1, 'N');
+
 -- --------------------------------------------------------
 
 --
@@ -2771,7 +2911,8 @@ INSERT INTO `kegiatan_dokumentasi` (`id_dokumentasi`, `id_kegiatan_detail`, `fil
 (20, 23, '23-20211115-024038.png', 34, '2021-11-15 02:40:38'),
 (21, 32, '32-20230614-093916.jpg', 103, '2023-06-14 09:39:16'),
 (22, 33, '33-20230614-095801.jpg', 103, '2023-06-14 09:58:01'),
-(23, 33, '33-20230621-115647.png', 103, '2023-06-21 11:56:47');
+(23, 33, '33-20230621-115647.png', 103, '2023-06-21 11:56:47'),
+(24, 4, '4-20241010-080936.jpeg', 175, '2024-10-10 08:09:36');
 
 -- --------------------------------------------------------
 
@@ -2790,6 +2931,14 @@ CREATE TABLE `log_upload` (
   `user_input` int(11) NOT NULL,
   `namafile` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `log_upload`
+--
+
+INSERT INTO `log_upload` (`id_log`, `tahun`, `bulan`, `id_skpd`, `st_data`, `tgl_data`, `tanggal_input`, `user_input`, `namafile`) VALUES
+(18, 2024, 10, 55, 2, '2024-10-02', '2024-10-02 12:53:58', 1, '55_lra_20241002-125345.xlsx'),
+(21, 2024, 10, 54, 2, '2024-10-10', '2024-10-10 10:04:21', 175, '54_lra_20241010-100421.xlsx');
 
 -- --------------------------------------------------------
 
@@ -2829,7 +2978,88 @@ CREATE TABLE `log_user` (
 
 INSERT INTO `log_user` (`log_id`, `username`, `aktivitas`, `aktivitas_detail`, `browser`, `waktu_akses`) VALUES
 (2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 10:23:25'),
-(2147483647, 'admin', 'new tbl_mandatory', '{\"tbl_mandatory\":{\"id_kabupaten\":\"34\",\"tahun\":\"2024\",\"pendidikan\":\"1\",\"kesehatan\":\"1\",\"infrastruktur\":\"1\",\"pengawasan\":\"1\",\"persen_pendidikan\":\"1\",\"persen_kesehatan\":\"1\",\"persen_infrestruktur\":\"1\",\"persen_pengawasan\":\"1\",\"st_apbd\":\"1\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 10:36:49');
+(2147483647, 'admin', 'new tbl_mandatory', '{\"tbl_mandatory\":{\"id_kabupaten\":\"34\",\"tahun\":\"2024\",\"pendidikan\":\"1\",\"kesehatan\":\"1\",\"infrastruktur\":\"1\",\"pengawasan\":\"1\",\"persen_pendidikan\":\"1\",\"persen_kesehatan\":\"1\",\"persen_infrestruktur\":\"1\",\"persen_pengawasan\":\"1\",\"st_apbd\":\"1\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 10:36:49'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 11:00:32'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 11:12:59'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"54\",\"nama_skpd\":\"DINAS PENDIDIKAN\",\"tahun\":\"2024\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 11:40:41'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"55\",\"nama_skpd\":\"DINAS KESEHATAN\",\"tahun\":\"2024\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 11:40:46'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 11:52:17'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Firefox\",\"version\":\"131.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2024-10-02 11:55:28'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Firefox\",\"version\":\"131.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2024-10-02 11:57:51'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 12:50:05'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 12:52:59'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 13:54:02'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 13:59:12'),
+(2147483647, 'admin', 'delete log_upload', '{\"log_upload\":{\"id_log\":\"7\",\"tahun\":\"2024\",\"bulan\":\"9\",\"id_skpd\":\"54\",\"st_data\":\"2\",\"tgl_data\":\"2024-09-30\",\"tanggal_input\":\"2024-10-02 12:11:08\",\"user_input\":\"1\",\"namafile\":\"54_lra_20241002-121107.xlsx\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 14:01:49'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 15:56:50'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 15:56:51'),
+(2147483647, 'admin', 'delete kegiatan', '{\"ta_kontrak\":{\"id_kontrak\":\"8\",\"tahun\":\"2024\",\"pagu\":\"0\",\"no_kontrak\":\"NO. KONTRAK\",\"kd_urusan\":\"1\",\"kd_bidang\":\"1\",\"kd_unit\":\"1\",\"kd_sub\":\"1\",\"kd_prog\":\"0\",\"id_prog\":\"0\",\"kd_keg\":\"38\",\"tgl_kontrak\":\"0000-00-00\",\"keperluan\":\"NAMA KEGIATAN\",\"waktu\":\"WAKTU PEKERJAAN\",\"nilai\":\"0\",\"nm_perusahaan\":\"NAMA PERUSAHAAN\",\"bentuk\":\"\",\"alamat\":\"\",\"nm_pemilik\":\"\",\"npwp\":\"\",\"nm_bank\":\"\",\"nm_rekening\":\"\",\"no_rekening\":\"\",\"real_kontrak\":\"0\",\"realisasi\":\"0\",\"persen_realisasi\":\"0\",\"tgl_input\":\"2024-10-02 16:27:52\",\"id_prioritas\":\"0\",\"id_kegiatan\":\"0\",\"status_1\":\"N\",\"status_2\":\"\",\"status_3\":\"Y\",\"koordinat\":\"KOORDINAT\",\"lokasi_pekerjaan\":\"LOKASI KEGIATAN\",\"adendum\":\"0\",\"keterangan\":\"\",\"st_adendum\":\"0\",\"realisasi_fisik\":\"0\"},\"ta_kontrak_pa\":null,\"data_kegiatan_detail\":[]}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 16:29:42'),
+(2147483647, 'admin', 'delete kegiatan', '{\"ta_kontrak\":{\"id_kontrak\":\"7\",\"tahun\":\"2024\",\"pagu\":\"0\",\"no_kontrak\":\"NO. KONTRAK\",\"kd_urusan\":\"1\",\"kd_bidang\":\"1\",\"kd_unit\":\"1\",\"kd_sub\":\"1\",\"kd_prog\":\"0\",\"id_prog\":\"0\",\"kd_keg\":\"38\",\"tgl_kontrak\":\"0000-00-00\",\"keperluan\":\"NAMA KEGIATAN\",\"waktu\":\"WAKTU PEKERJAAN\",\"nilai\":\"0\",\"nm_perusahaan\":\"NAMA PERUSAHAAN\",\"bentuk\":\"\",\"alamat\":\"\",\"nm_pemilik\":\"\",\"npwp\":\"\",\"nm_bank\":\"\",\"nm_rekening\":\"\",\"no_rekening\":\"\",\"real_kontrak\":\"0\",\"realisasi\":\"0\",\"persen_realisasi\":\"0\",\"tgl_input\":\"2024-10-02 16:27:49\",\"id_prioritas\":\"0\",\"id_kegiatan\":\"0\",\"status_1\":\"N\",\"status_2\":\"\",\"status_3\":\"Y\",\"koordinat\":\"KOORDINAT\",\"lokasi_pekerjaan\":\"LOKASI KEGIATAN\",\"adendum\":\"0\",\"keterangan\":\"\",\"st_adendum\":\"0\",\"realisasi_fisik\":\"0\"},\"ta_kontrak_pa\":null,\"data_kegiatan_detail\":[]}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 16:29:45'),
+(2147483647, 'admin', 'insert kegiatan', '{\"ta_kontrak\":{\"tahun\":\"2024\",\"id_prioritas\":0,\"id_kegiatan\":0,\"no_kontrak\":\"\",\"pagu\":\"100000000\",\"kd_urusan\":\"1\",\"kd_bidang\":\"1\",\"kd_unit\":\"1\",\"kd_sub\":\"1\",\"kd_keg\":\"38\",\"tgl_kontrak\":\"1970-01-01\",\"keperluan\":\"tes1\",\"waktu\":\"\",\"nilai\":\"\",\"nm_perusahaan\":\"\",\"status_1\":\"N\",\"status_2\":\"N\",\"koordinat\":\"\",\"lokasi_pekerjaan\":\"\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 16:29:59'),
+(2147483647, 'admin', 'insert kegiatan', '{\"ta_kontrak\":{\"tahun\":\"2024\",\"id_prioritas\":0,\"id_kegiatan\":0,\"no_kontrak\":\"\",\"pagu\":\"200000000\",\"kd_urusan\":\"1\",\"kd_bidang\":\"1\",\"kd_unit\":\"1\",\"kd_sub\":\"1\",\"kd_keg\":\"38\",\"tgl_kontrak\":\"1970-01-01\",\"keperluan\":\"tes 2\",\"waktu\":\"\",\"nilai\":\"\",\"nm_perusahaan\":\"\",\"status_1\":\"N\",\"status_2\":\"N\",\"koordinat\":\"\",\"lokasi_pekerjaan\":\"\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 16:30:09'),
+(2147483647, 'admin', 'insert pa', '{\"ta_kontrak_pa\":{\"id_kontrak\":\"9\",\"nama_pa\":\"1\",\"nip_pa\":\"1\"},\"ta_kontrak\":{\"old\":\"0\",\"new\":\"0.00\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 16:31:42'),
+(2147483647, 'admin', 'update pa', '{\"ta_kontrak_pa\":{\"old\":{\"id_kontrak\":\"9\",\"nama_pa\":\"1\",\"nip_pa\":\"1\"},\"new\":{\"tahun\":\"2024\",\"no_kontrak\":\"212121\",\"pagu\":\"100000000.00\",\"tgl_kontrak\":\"1970-01-01\",\"keperluan\":\"tes1 fdfdf\",\"waktu\":\"1\",\"nilai\":\"0.00\",\"nm_perusahaan\":\"\",\"koordinat\":\"\",\"status_2\":\"N\",\"lokasi_pekerjaan\":\"\"}},\"ta_kontrak\":{\"old\":\"0\",\"new\":\"0.00\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-02 16:31:49'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 07:37:49'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 07:56:47'),
+(2147483647, 'admin', 'insert user', '{\"users\":{\"username\":\"disdik\",\"nama_user\":\"Admin Disdik\",\"nip_user\":\"123\",\"id_skpd\":\"54\",\"password\":\"$2y$10$5xkIFKyYITgfHyQABjEMAOUJcnV7qz1nbOg9CW6YoF555G9pS1s5q\",\"foto_profile\":\"no-image.png\",\"level\":\"3\",\"skpd\":\"Y\"}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 08:07:05'),
+(2147483647, 'disdik', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 08:07:19'),
+(2147483647, 'disdik', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 08:28:05'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 08:28:09'),
+(2147483647, 'disdik', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-05 09:05:53'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-06 08:53:05'),
+(2147483647, 'disdik', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-08 06:33:50'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-08 06:34:01'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-08 07:02:10'),
+(2147483647, 'disdik', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 07:47:39'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2024-10-10 07:47:43'),
+(2147483647, 'disdik', 'insert kegiatan', '{\"ta_kontrak\":{\"tahun\":\"2024\",\"id_prioritas\":0,\"id_kegiatan\":0,\"no_kontrak\":\"12121212\",\"pagu\":\"100000000\",\"kd_urusan\":\"3\",\"kd_bidang\":\"1\",\"kd_unit\":\"1\",\"kd_sub\":\"1\",\"kd_keg\":\"54\",\"tgl_kontrak\":\"2024-10-01\",\"keperluan\":\"data kegiatan 1\",\"waktu\":\"2 bualan\",\"nilai\":\"99000000\",\"nm_perusahaan\":\"\",\"status_1\":\"N\",\"status_2\":\"N\",\"koordinat\":\"\",\"lokasi_pekerjaan\":\"\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 07:59:36'),
+(2147483647, 'disdik', 'insert detail kegiatan', '{\"data_kegiatan_detail\":{\"id_kegiatan\":\"11\",\"jenis_target\":\"H\",\"tahapan_target\":\"1\",\"jadwal_target\":\"2024-10-16\",\"target\":\"100\",\"user_input\":\"175\",\"tgl_input\":\"2024-10-10 07:59:59\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 07:59:59'),
+(2147483647, 'disdik', 'update realisasi', '{\"data_kegiatan_detail\":{\"old\":{\"id_kegiatan_detail\":\"4\",\"id_kegiatan\":\"11\",\"jenis_target\":\"H\",\"tahapan_target\":\"1\",\"jadwal_target\":\"2024-10-16\",\"target\":\"100\",\"target_keuangan\":\"0\",\"realisasi\":\"0\",\"realisasi_keuangan\":\"0\",\"keterangan_target\":\"\",\"user_input\":\"175\",\"tgl_input\":\"2024-10-10 07:59:59\"},\"new\":{\"realisasi\":\"100\",\"keterangan_target\":\"\"}}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 08:00:06'),
+(2147483647, 'disdik', 'upload dokumentasi', '', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 08:09:36'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 08:20:14'),
+(2147483647, 'admin', 'update access menu', '{\"users_access\":{\"old\":{\"access_id\":\"17\",\"role_id\":\"3\",\"menu_id\":\"1\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},\"new\":[{\"menu_id\":\"1\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"5\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"43\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"42\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"6\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"44\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"7\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"8\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"12\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"13\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"14\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"15\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"16\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"17\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"18\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"19\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"20\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"21\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"28\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"29\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"30\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"31\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"33\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"34\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"35\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"36\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"37\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"38\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"39\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"40\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"41\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"9\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"10\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"11\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"2\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"3\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"4\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"}]}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 08:21:18'),
+(2147483647, 'disdik', 'update', '{\"users\":{\"foto_profile\":\"disdik-20241010-082128.jpeg\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 08:21:28'),
+(2147483647, 'disdik', 'update', '{\"users\":{\"password\":\"$2y$10$Tnmr73SdJ5s78W7mhSaH.OXASu.86\\/TzFaNGtn6ABpiVAvyz5HHFi\"}}', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 08:21:36'),
+(2147483647, 'disdik', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"113.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2024-10-10 09:31:06'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 09:31:14'),
+(2147483647, 'admin', 'update access menu', '{\"users_access\":{\"old\":{\"access_id\":\"17\",\"role_id\":\"3\",\"menu_id\":\"1\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},\"new\":[{\"menu_id\":\"1\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"5\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"43\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"42\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"6\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"44\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"7\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"8\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"12\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"13\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"14\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"15\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"16\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"17\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"18\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"19\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"20\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"21\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"28\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"29\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"30\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"31\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"33\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"34\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"35\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"36\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"37\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"38\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"39\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"40\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"41\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"Y\",\"ubah_1\":\"Y\",\"hapus_1\":\"Y\"},{\"menu_id\":\"9\",\"akses\":\"Y\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"10\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"11\",\"akses\":\"Y\",\"tambah\":\"Y\",\"ubah\":\"Y\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"2\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"3\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"},{\"menu_id\":\"4\",\"akses\":\"N\",\"tambah\":\"N\",\"ubah\":\"N\",\"hapus\":\"N\",\"ubah_1\":\"N\",\"hapus_1\":\"N\"}]}}', '{\"browser\":\"Chrome\",\"version\":\"129.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-10-10 09:32:18'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"130.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-11-07 08:37:18'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"130.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2024-11-07 08:50:28'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"115.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-03 14:55:44'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"131.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-03 16:51:12'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"131.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-03 17:49:15'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"115.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-04 11:15:41'),
+(2147483647, 'admin', 'insert user', '{\"users\":{\"username\":\"1212121\",\"nama_user\":\"121212\",\"nip_user\":\"12121212\",\"id_skpd\":\"38\",\"password\":\"$2y$10$IRBB7uanpZtUyrZ8sZG5ZeoYwC2FtdS6Nz23qWmjLZ4zRTxrQVRV.\",\"foto_profile\":\"no-image.png\",\"level\":\"2\",\"skpd\":\"N\"}}', '{\"browser\":\"Opera\",\"version\":\"115.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-04 11:16:00'),
+(2147483647, 'admin', 'delete user', '{\"users\":{\"id_user\":\"176\",\"username\":\"1212121\",\"nama_user\":\"121212\",\"nip_user\":\"12121212\",\"password\":\"$2y$10$IRBB7uanpZtUyrZ8sZG5ZeoYwC2FtdS6Nz23qWmjLZ4zRTxrQVRV.\",\"foto_profile\":\"no-image.png\",\"role_admin\":\"master\",\"id_skpd\":\"38\",\"id_pegawai\":\"\",\"is_active\":\"Y\",\"level\":\"2\",\"skpd\":\"N\"}}', '{\"browser\":\"Opera\",\"version\":\"115.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-04 11:16:14'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"115.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-04 13:33:07'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"115.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-01-04 13:33:41'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:17:34'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"38\",\"nama_skpd\":\"SEKRETARIAT DAERAH\",\"tahun\":\"2025\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:18:33'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"52\",\"nama_skpd\":\"SEKRETARIAT DPRD\",\"tahun\":\"2025\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:18:38'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"53\",\"nama_skpd\":\"INSPEKTORAT DAERAH\",\"tahun\":\"2025\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:18:43'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"54\",\"nama_skpd\":\"DINAS PENDIDIKAN\",\"tahun\":\"2025\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:18:46'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"55\",\"nama_skpd\":\"DINAS KESEHATAN\",\"tahun\":\"2025\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:18:49'),
+(2147483647, 'admin', 'insert data_skpd_tahun', '{\"data_skpd_tahun\":{\"id_skpd\":\"57\",\"nama_skpd\":\"DINAS PEKERJAAN UMUM DAN TATA RUANG\",\"tahun\":\"2025\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:18:53'),
+(2147483647, 'admin', 'new setting_anggaran', '{\"setting_anggaran\":{\"tahun\":\"2025\",\"pendapatan\":\"200000000\",\"belanja\":\"200000000\",\"pendapatan_p\":\"0\",\"belanja_p\":\"0\",\"papbd\":\"2025-10-31\"}}', '{\"browser\":\"Opera\",\"version\":\"118.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-05-09 21:22:05'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 07:56:37'),
+(2147483647, 'admin', 'update ta_kabupaten', '{\"ta_kabupaten\":{\"old\":{\"id_kabupaten\":\"34\",\"nama_kabupaten\":\"KABUPATEN MANDAILING NATAL\",\"kabupaten_danadesa\":\"Panyabungan\",\"kode\":\"0\"},\"new\":{\"nama_kabupaten\":\"KABUPATEN PAKPAK BHARAT\",\"kabupaten_danadesa\":\"Salak\"}}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 08:02:04'),
+(2147483647, 'admin', 'update tbl_tampilan', '{\"tbl_tampilan\":{\"old\":{\"id_data\":\"1\",\"title\":\"Progress Report Pengendalian Pembangunan Kabupaten Mandailing Natal\",\"copyright\":\"Bagian Administrasi Pembangunan Setda Kab. Mandailing Natal\",\"judul1\":\"Aplikasi\",\"judul2\":\"PRP2Madina\",\"sub1\":\"Progress Report Pengendalian Pembangunan\",\"sub2\":\"Kabupaten  Mandailing Natal\",\"bagian1\":\"Bagian Administrasi Pembangunan\",\"bagian2\":\"Setda Kab. Mandailing Natal\",\"logo\":\"logo-20241001-080510.png\",\"banner\":\"banner-20241001-080601.png\",\"foto\":\"foto-20241001-080619.png\",\"link\":\"https:\\/\\/madina.go.id\",\"koordinat\":\"2.936025308775414, 99.00081646225541\",\"zoom\":\"10\"},\"new\":{\"title\":\"Progress Report Pengendalian Pembangunan Kabupaten Pakpak Bharat\",\"copyright\":\"Bagian Administrasi Pembangunan Setda Kab. Pakpak Bharat\",\"judul1\":\"Aplikasi\",\"judul2\":\"PRPP Pakpak Bharat\",\"sub1\":\"Progress Report Pengendalian Pembangunan\",\"sub2\":\"Kabupaten  Pakpak Bharat\",\"bagian1\":\"Bagian Administrasi Pembangunan\",\"bagian2\":\"Setda Kab. Pakpak Bharat\",\"link\":\"https:\\/\\/madina.go.id\",\"koordinat\":\"2.936025308775414, 99.00081646225541\",\"zoom\":\"10\"}}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 08:03:43'),
+(2147483647, 'admin', 'tbl_tampilan', '{\"tbl_tampilan\":{\"logo\":\"logo-20250618-080510.png\"}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 08:05:10'),
+(2147483647, 'admin', 'update tbl_tampilan', '{\"tbl_tampilan\":{\"old\":{\"id_data\":\"1\",\"title\":\"Progress Report Pengendalian Pembangunan Kabupaten Pakpak Bharat\",\"copyright\":\"Bagian Administrasi Pembangunan Setda Kab. Pakpak Bharat\",\"judul1\":\"Aplikasi\",\"judul2\":\"PRPP Pakpak Bharat\",\"sub1\":\"Progress Report Pengendalian Pembangunan\",\"sub2\":\"Kabupaten  Pakpak Bharat\",\"bagian1\":\"Bagian Administrasi Pembangunan\",\"bagian2\":\"Setda Kab. Pakpak Bharat\",\"logo\":\"logo-20250618-080510.png\",\"banner\":\"banner-20241001-080601.png\",\"foto\":\"foto-20241001-080619.png\",\"link\":\"https:\\/\\/madina.go.id\",\"koordinat\":\"2.936025308775414, 99.00081646225541\",\"zoom\":\"10\"},\"new\":{\"title\":\"Progress Report Pengendalian Pembangunan Kabupaten Pakpak Bharat\",\"copyright\":\"Bagian Administrasi Pembangunan Setda Kab. Pakpak Bharat\",\"judul1\":\"Aplikasi\",\"judul2\":\"PR2 Pakpak Bharat\",\"sub1\":\"Progress Report Pengendalian Pembangunan\",\"sub2\":\"Kabupaten  Pakpak Bharat\",\"bagian1\":\"Bagian Administrasi Pembangunan\",\"bagian2\":\"Setda Kab. Pakpak Bharat\",\"link\":\"https:\\/\\/madina.go.id\",\"koordinat\":\"2.936025308775414, 99.00081646225541\",\"zoom\":\"10\"}}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 08:06:21'),
+(2147483647, 'admin', 'tbl_tampilan', '{\"tbl_tampilan\":{\"logo\":\"logo-20250618-080706.png\"}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 08:07:06'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 09:07:45'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 09:55:35'),
+(2147483647, 'admin', 'tbl_tampilan', '{\"tbl_tampilan\":{\"banner\":\"banner-20250618-095625.png\"}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 09:56:25'),
+(2147483647, 'admin', 'tbl_tampilan', '{\"tbl_tampilan\":{\"foto\":\"foto-20250618-095632.png\"}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 09:56:32'),
+(2147483647, 'admin', 'update tbl_tampilan', '{\"tbl_tampilan\":{\"old\":{\"id_data\":\"1\",\"title\":\"Progress Report Pengendalian Pembangunan Kabupaten Pakpak Bharat\",\"copyright\":\"Bagian Administrasi Pembangunan Setda Kab. Pakpak Bharat\",\"judul1\":\"Aplikasi\",\"judul2\":\"PR2 Pakpak Bharat\",\"sub1\":\"Progress Report Pengendalian Pembangunan\",\"sub2\":\"Kabupaten  Pakpak Bharat\",\"bagian1\":\"Bagian Administrasi Pembangunan\",\"bagian2\":\"Setda Kab. Pakpak Bharat\",\"logo\":\"logo-20250618-080706.png\",\"banner\":\"banner-20250618-095625.png\",\"foto\":\"foto-20250618-095632.png\",\"link\":\"https:\\/\\/madina.go.id\",\"koordinat\":\"2.936025308775414, 99.00081646225541\",\"zoom\":\"10\"},\"new\":{\"title\":\"Progress Report Pengendalian Pembangunan Kabupaten Pakpak Bharat\",\"copyright\":\"Bagian Administrasi Pembangunan Setda Kab. Pakpak Bharat\",\"judul1\":\"Aplikasi\",\"judul2\":\"PRPP\",\"sub1\":\"Progress Report Pengendalian Pembangunan\",\"sub2\":\"Kabupaten  Pakpak Bharat\",\"bagian1\":\"Bagian Administrasi Pembangunan\",\"bagian2\":\"Setda Kab. Pakpak Bharat\",\"link\":\"https:\\/\\/pakpakbharatkab.go.id\\/\",\"koordinat\":\"2.5343463118491543, 98.24587379780277\",\"zoom\":\"10\"}}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 09:58:11'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 10:05:16'),
+(2147483647, 'admin', 'tbl_tampilan', '{\"tbl_tampilan\":{\"logo\":\"logo-20250618-100529.png\"}}', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 10:05:29'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 10:06:02'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Chrome\",\"version\":\"137.0.0.0\",\"os\":\"Windows 10\",\"ip\":\"::1\"}', '2025-06-18 10:10:15'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Firefox\",\"version\":\"139.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2025-06-18 10:19:49'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Firefox\",\"version\":\"139.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2025-06-18 10:22:12'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Firefox\",\"version\":\"139.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2025-06-18 10:23:33'),
+(2147483647, 'admin', 'login', '-', '{\"browser\":\"Firefox\",\"version\":\"139.0\",\"os\":\"Windows 10\",\"ip\":\"127.0.0.1\"}', '2025-06-18 10:26:02');
 
 -- --------------------------------------------------------
 
@@ -2887,7 +3117,8 @@ INSERT INTO `setting_anggaran` (`id_setting`, `tahun`, `pendapatan`, `belanja`, 
 (2, 2022, 1010829400050, 1039563285496, '2021-12-30', 0, 0),
 (3, 2022, 942541818298, 1066322774767, '2022-10-28', 0, 0),
 (8, 2023, 2378168923917, 2464572666859, '2023-10-23', 2378168923917, 2464572666859),
-(9, 2024, 2781171448903, 2803671448903, '2024-10-31', 0, 0);
+(9, 2024, 2781171448903, 2803671448903, '2024-10-31', 0, 0),
+(10, 2025, 200000000, 200000000, '2025-10-31', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2907,7 +3138,7 @@ CREATE TABLE `ta_kabupaten` (
 --
 
 INSERT INTO `ta_kabupaten` (`id_kabupaten`, `nama_kabupaten`, `kabupaten_danadesa`, `kode`) VALUES
-(34, 'KABUPATEN MANDAILING NATAL', 'Panyabungan', 0);
+(34, 'KABUPATEN PAKPAK BHARAT', 'Salak', 0);
 
 -- --------------------------------------------------------
 
@@ -2956,6 +3187,15 @@ CREATE TABLE `ta_kontrak` (
   `realisasi_fisik` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `ta_kontrak`
+--
+
+INSERT INTO `ta_kontrak` (`id_kontrak`, `tahun`, `pagu`, `no_kontrak`, `kd_urusan`, `kd_bidang`, `kd_unit`, `kd_sub`, `kd_prog`, `id_prog`, `kd_keg`, `tgl_kontrak`, `keperluan`, `waktu`, `nilai`, `nm_perusahaan`, `bentuk`, `alamat`, `nm_pemilik`, `npwp`, `nm_bank`, `nm_rekening`, `no_rekening`, `real_kontrak`, `realisasi`, `persen_realisasi`, `tgl_input`, `id_prioritas`, `id_kegiatan`, `status_1`, `status_2`, `status_3`, `koordinat`, `lokasi_pekerjaan`, `adendum`, `keterangan`, `st_adendum`, `realisasi_fisik`) VALUES
+(9, 2024, 100000000, '212121', 1, 1, 1, 1, 0, 0, 38, '1970-01-01', 'tes1 fdfdf 3242342 qqqq', '1', 0, NULL, '', '', '', '', '', '', '', 0, 0, 0, '2024-10-02 16:29:59', 0, 0, 'N', 'N', 'Y', NULL, NULL, 0, '', 0, 0),
+(10, 2024, 200000000, NULL, 1, 1, 1, 1, 0, 0, 38, '1970-01-01', 'tes 2 dfdf 2342rwer aaaaa', NULL, 0, NULL, '', '', '', '', '', '', '', 0, 0, 0, '2024-10-02 16:30:09', 0, 0, 'N', 'N', 'Y', NULL, NULL, 0, '', 0, 0),
+(11, 2024, 100000000, '12121212', 3, 1, 1, 1, 0, 0, 54, '2024-10-01', 'data kegiatan 1', '2 bualan', 99000000, '', '', '', '', '', '', '', '', 0, 0, 0, '2024-10-10 07:59:36', 0, 0, 'N', 'N', 'Y', '', '', 0, '', 0, 100);
+
 -- --------------------------------------------------------
 
 --
@@ -2967,6 +3207,14 @@ CREATE TABLE `ta_kontrak_pa` (
   `nama_pa` varchar(100) NOT NULL,
   `nip_pa` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `ta_kontrak_pa`
+--
+
+INSERT INTO `ta_kontrak_pa` (`id_kontrak`, `nama_pa`, `nip_pa`) VALUES
+(0, 'NAMA KPA', 'NIP KPA'),
+(9, '1', '1');
 
 -- --------------------------------------------------------
 
@@ -3195,7 +3443,11 @@ CREATE TABLE `tbl_realisasi_skpd` (
 
 INSERT INTO `tbl_realisasi_skpd` (`id_realisasi`, `id_skpd`, `tahun`, `bulan`, `kode_rekening`, `realisasi`) VALUES
 (1, 38, 2024, 2, 4, 0),
-(2, 38, 2024, 2, 5, 0);
+(2, 38, 2024, 2, 5, 0),
+(3, 54, 2024, 10, 4, 10000000),
+(4, 54, 2024, 10, 5, 30000000),
+(7, 55, 2024, 10, 4, 0),
+(8, 55, 2024, 10, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -3226,7 +3478,7 @@ CREATE TABLE `tbl_tampilan` (
 --
 
 INSERT INTO `tbl_tampilan` (`id_data`, `title`, `copyright`, `judul1`, `judul2`, `sub1`, `sub2`, `bagian1`, `bagian2`, `logo`, `banner`, `foto`, `link`, `koordinat`, `zoom`) VALUES
-(1, 'Progress Report Pengendalian Pembangunan Kabupaten Mandailing Natal', 'Bagian Administrasi Pembangunan Setda Kab. Mandailing Natal', 'Aplikasi', 'PRP2Madina', 'Progress Report Pengendalian Pembangunan', 'Kabupaten  Mandailing Natal', 'Bagian Administrasi Pembangunan', 'Setda Kab. Mandailing Natal', 'logo-20241001-080510.png', 'banner-20241001-080601.png', 'foto-20241001-080619.png', 'https://madina.go.id', '2.936025308775414, 99.00081646225541', 10);
+(1, 'Progress Report Pengendalian Pembangunan Kabupaten Pakpak Bharat', 'Bagian Administrasi Pembangunan Setda Kab. Pakpak Bharat', 'Aplikasi', 'PRPP', 'Progress Report Pengendalian Pembangunan', 'Kabupaten  Pakpak Bharat', 'Bagian Administrasi Pembangunan', 'Setda Kab. Pakpak Bharat', 'logo-20250618-100529.png', 'banner-20250618-095625.png', 'foto-20250618-095632.png', 'https://pakpakbharatkab.go.id/', '2.5343463118491543, 98.24587379780277', 10);
 
 -- --------------------------------------------------------
 
@@ -3254,7 +3506,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `nama_user`, `nip_user`, `password`, `foto_profile`, `role_admin`, `id_skpd`, `id_pegawai`, `is_active`, `level`, `skpd`) VALUES
-(1, 'admin', 'BERNANDO D. SILAEN, ST., M.Si.', '197708202006041014', '$2y$10$yP2linCxMV2HM9XGe4YWE.Qk9SIm728yIA97PDWUW4M.d5hZr/ugi', 'admin-20240202-101928.png', 'master', 38, '', 'Y', 1, 'N');
+(1, 'admin', 'BERNANDO D. SILAEN, ST., M.Si.', '197708202006041014', '$2y$10$yP2linCxMV2HM9XGe4YWE.Qk9SIm728yIA97PDWUW4M.d5hZr/ugi', 'admin-20240202-101928.png', 'master', 38, '', 'Y', 1, 'N'),
+(175, 'disdik', 'Admin Disdik', '123', '$2y$10$Tnmr73SdJ5s78W7mhSaH.OXASu.86/TzFaNGtn6ABpiVAvyz5HHFi', 'disdik-20241010-082128.jpeg', 'master', 54, '', 'Y', 3, 'Y');
 
 -- --------------------------------------------------------
 
@@ -3303,9 +3556,9 @@ INSERT INTO `users_access` (`access_id`, `role_id`, `menu_id`, `akses`, `tambah`
 (22, 3, 6, 'N', 'N', 'N', 'N', 'N', 'N'),
 (23, 3, 7, 'N', 'N', 'N', 'N', 'N', 'N'),
 (24, 3, 8, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(25, 3, 9, 'N', 'N', 'N', 'N', 'N', 'N'),
+(25, 3, 9, 'Y', 'N', 'N', 'N', 'N', 'N'),
 (26, 3, 10, 'N', 'N', 'N', 'N', 'N', 'N'),
-(27, 3, 11, 'N', 'N', 'N', 'N', 'N', 'N'),
+(27, 3, 11, 'Y', 'Y', 'Y', 'N', 'N', 'N'),
 (28, 3, 12, 'N', 'N', 'N', 'N', 'N', 'N'),
 (29, 3, 13, 'N', 'N', 'N', 'N', 'N', 'N'),
 (30, 3, 14, 'N', 'N', 'N', 'N', 'N', 'N'),
@@ -3330,23 +3583,23 @@ INSERT INTO `users_access` (`access_id`, `role_id`, `menu_id`, `akses`, `tambah`
 (56, 1, 39, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (57, 1, 40, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (58, 1, 41, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(59, 3, 18, 'Y', 'N', 'N', 'N', 'N', 'N'),
-(60, 3, 19, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(61, 3, 20, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(62, 3, 21, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(59, 3, 18, 'N', 'N', 'N', 'N', 'N', 'N'),
+(60, 3, 19, 'N', 'N', 'N', 'N', 'N', 'N'),
+(61, 3, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
+(62, 3, 21, 'N', 'N', 'N', 'N', 'N', 'N'),
 (69, 3, 28, 'Y', 'N', 'N', 'N', 'N', 'N'),
-(70, 3, 29, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(70, 3, 29, 'N', 'N', 'N', 'N', 'N', 'N'),
 (71, 3, 30, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (72, 3, 31, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (83, 1, 42, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (84, 2, 1, 'Y', 'N', 'N', 'N', 'N', 'N'),
-(75, 3, 34, 'Y', 'N', 'N', 'N', 'N', 'N'),
-(76, 3, 35, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(77, 3, 36, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(78, 3, 37, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(75, 3, 34, 'N', 'N', 'N', 'N', 'N', 'N'),
+(76, 3, 35, 'N', 'N', 'N', 'N', 'N', 'N'),
+(77, 3, 36, 'N', 'N', 'N', 'N', 'N', 'N'),
+(78, 3, 37, 'N', 'N', 'N', 'N', 'N', 'N'),
 (79, 3, 38, 'Y', 'N', 'N', 'N', 'N', 'N'),
-(80, 3, 39, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(81, 3, 40, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(80, 3, 39, 'N', 'N', 'N', 'N', 'N', 'N'),
+(81, 3, 40, 'N', 'N', 'N', 'N', 'N', 'N'),
 (82, 3, 41, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (86, 2, 3, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (87, 2, 4, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
@@ -3778,7 +4031,7 @@ ALTER TABLE `data_kegiatan`
 -- AUTO_INCREMENT untuk tabel `data_kegiatan_detail`
 --
 ALTER TABLE `data_kegiatan_detail`
-  MODIFY `id_kegiatan_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kegiatan_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_kegiatan_fisik`
@@ -3796,19 +4049,19 @@ ALTER TABLE `data_kode_rekening`
 -- AUTO_INCREMENT untuk tabel `data_kontrak_real`
 --
 ALTER TABLE `data_kontrak_real`
-  MODIFY `id_real` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_real` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_realisasi_detail_skpd`
 --
 ALTER TABLE `data_realisasi_detail_skpd`
-  MODIFY `id_realisasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_realisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_serapan_skpd`
 --
 ALTER TABLE `data_serapan_skpd`
-  MODIFY `id_serapan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=469;
+  MODIFY `id_serapan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=532;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_skpd`
@@ -3820,13 +4073,13 @@ ALTER TABLE `data_skpd`
 -- AUTO_INCREMENT untuk tabel `data_skpd_tahun`
 --
 ALTER TABLE `data_skpd_tahun`
-  MODIFY `id_data` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_data` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_uraian_kegiatan_skpd`
 --
 ALTER TABLE `data_uraian_kegiatan_skpd`
-  MODIFY `id_uraian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_uraian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -3838,13 +4091,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `kegiatan_dokumentasi`
 --
 ALTER TABLE `kegiatan_dokumentasi`
-  MODIFY `id_dokumentasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_dokumentasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `log_upload`
 --
 ALTER TABLE `log_upload`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `log_upload_realisasi`
@@ -3868,7 +4121,7 @@ ALTER TABLE `pengguna_anggaran`
 -- AUTO_INCREMENT untuk tabel `setting_anggaran`
 --
 ALTER TABLE `setting_anggaran`
-  MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `ta_kabupaten`
@@ -3880,7 +4133,7 @@ ALTER TABLE `ta_kabupaten`
 -- AUTO_INCREMENT untuk tabel `ta_kontrak`
 --
 ALTER TABLE `ta_kontrak`
-  MODIFY `id_kontrak` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kontrak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_dana_dekon`
@@ -3916,7 +4169,7 @@ ALTER TABLE `tbl_realisasi_dekon`
 -- AUTO_INCREMENT untuk tabel `tbl_realisasi_skpd`
 --
 ALTER TABLE `tbl_realisasi_skpd`
-  MODIFY `id_realisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_realisasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_tampilan`
@@ -3928,7 +4181,7 @@ ALTER TABLE `tbl_tampilan`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT untuk tabel `users_access`

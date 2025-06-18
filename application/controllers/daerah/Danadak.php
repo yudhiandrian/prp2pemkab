@@ -6,7 +6,6 @@ class Danadak extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('PHPExcel');
         $this->load->model('M_fungsi', 'fungsi');
         $this->user = is_logged_in();
         $this->akses = cek_akses_user();
