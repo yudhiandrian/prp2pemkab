@@ -185,7 +185,7 @@ function hapus_file($path, $file)
 
 function tahun_mulai()
 {
-    return "2024";
+    return "2025";
 }
 
 function fungsi_bulan($bulan, $tahun)
