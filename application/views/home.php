@@ -1,6 +1,6 @@
 <?php
     $temp = $this->mquery->select_id('tbl_tampilan', ['id_data' => 1]);
-    $cek_data = $this->mquery->count_data('tbl_dana_desa_log');
+    $cek_data = $this->mquery->count_data('data_uraian_kegiatan_skpd',['kode_rekening'=>'4.3.5']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

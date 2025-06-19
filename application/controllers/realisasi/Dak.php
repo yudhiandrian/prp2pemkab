@@ -6,7 +6,6 @@ class Dak extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('PHPExcel');
         $this->load->model('M_fungsi', 'fungsi');
         $this->user = is_logged_in();
         $this->akses = cek_akses_user();
@@ -40,21 +39,33 @@ class Dak extends CI_Controller
             foreach ($result as $r) {
                 $encrypt_id = encrypt_url($r['id_skpd']);
 
-                $result_realisasi = 0;
                 $where = array('id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'jenis' => 1);
-                $result_max = $this->mquery->max_data_where("log_upload_realisasi", "bulan", $where);
-                $row_log_upload = $this->mquery->select_id('log_upload_realisasi', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'jenis' => 1, 'bulan' => $result_max['bulan']]);
-                $row_users = $this->mquery->select_id('users', ['id_user' => $row_log_upload['user_input']]);
+                $cek_data = $this->mquery->count_data('log_upload_realisasi', $where);
+                if($cek_data==0){
+                    $user_input="";
+                    $bulan = 1;
+                    $tanggal_data = "";
+                    $tanggal_input = "";
+                }else{
+                    $result_max = $this->mquery->max_data_where("log_upload_realisasi", "bulan", $where);
+                    $row_log_upload = $this->mquery->select_id('log_upload_realisasi', ['id_skpd' => $r['id_skpd'], 'tahun' => $tahun, 'jenis' => 1, 'bulan' => $result_max['bulan']]);
+                    $row_users = $this->mquery->select_id('users', ['id_user' => $row_log_upload['user_input']]);
+                    $user_input=$row_users['username'];
+                    $bulan = 1;
+                    $tanggal_data = $row_log_upload['tgl_data'];
+                    $tanggal_input = $row_log_upload['tanggal_input'];
+                }
+                
                 $nama_skpd = "<a href=" . base_url("realisasi-dana-dak/detail/" . $tahun . '/' .$encrypt_id) . "><h2>" . $r['nama_skpd'] . "</h2></a>";
                 
                 $hsl_realisasi = $this->mquery->sum_data('tbl_data_dak', 'total', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun]);
                 $dipa = $hsl_realisasi['total'];
 
-                $hsl_realisasi = $this->mquery->sum_data('tbl_realisasi_dak', 'sp2d_tahap1', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $result_max['bulan']]);
+                $hsl_realisasi = $this->mquery->sum_data('tbl_realisasi_dak', 'sp2d_tahap1', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $bulan]);
                 $sp2d_tahap1 = $hsl_realisasi['sp2d_tahap1'];
-                $hsl_realisasi = $this->mquery->sum_data('tbl_realisasi_dak', 'sp2d_tahap2', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $result_max['bulan']]);
+                $hsl_realisasi = $this->mquery->sum_data('tbl_realisasi_dak', 'sp2d_tahap2', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $bulan]);
                 $sp2d_tahap2 = $hsl_realisasi['sp2d_tahap2'];
-                $hsl_realisasi = $this->mquery->sum_data('tbl_realisasi_dak', 'sp2d_tahap3', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $result_max['bulan']]);
+                $hsl_realisasi = $this->mquery->sum_data('tbl_realisasi_dak', 'sp2d_tahap3', ['id_satker' => $r['id_skpd'], 'tahun' => $tahun, 'bulan' => $bulan]);
                 $sp2d_tahap3 = $hsl_realisasi['sp2d_tahap3'];
                 $sp2d_total=$sp2d_tahap1+$sp2d_tahap2+$sp2d_tahap3;
                 if($dipa==0){$persen=0;}else
@@ -71,13 +82,13 @@ class Dak extends CI_Controller
                 $row = [
                     'no' => $no,
                     'nama_skpd' => $nama_skpd,
-                    'bulan' => bulan($result_max['bulan']),
+                    'bulan' => bulan($bulan),
                     'dipa' => format_rupiah($dipa),
                     'tampil_tahap' => $tampil_tahap,
                     'persen' => format_rupiah($persen)." %",
-                    'tanggal_data' => $row_log_upload['tgl_data'],
-                    'tanggal_input' => $row_log_upload['tanggal_input'],
-                    'user_input' => $row_users['username']
+                    'tanggal_data' => $tanggal_data,
+                    'tanggal_input' => $tanggal_input,
+                    'user_input' => $user_input,
                 ];
                 $data[] = $row;
             }

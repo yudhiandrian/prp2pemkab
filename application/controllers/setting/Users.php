@@ -43,8 +43,11 @@ class Users extends CI_Controller
                     {$delete = action_delete(encrypt_url($r['id_user']));}
                 else{$delete = "-";}
                 
-                $result_skpd = $this->mquery->select_id('data_skpd', ['id_skpd' => $r['id_skpd']]);
-                $nama_skpd = $result_skpd['nama_skpd'];
+                $cek_skpd = $this->mquery->count_data('data_skpd_tahun', ['id_skpd' => $r['id_skpd']]);
+                if($cek_skpd==0){$nama_skpd = "";}else{
+                    $result_skpd = $this->mquery->select_id('data_skpd_tahun', ['id_skpd' => $r['id_skpd']]);
+                    $nama_skpd = $result_skpd['nama_skpd'];
+                }
 
                 $users_level = $this->mquery->select_id('users_level', ['role_id' => $r['level']]);
 
@@ -57,7 +60,8 @@ class Users extends CI_Controller
                     'nama_skpd' => $nama_skpd,
                     'keterangan' => $users_level['role_name'],
                     'password' => $password,
-                    'opsi' => $edit . ' ' . $delete
+                    'opsi' => $edit . ' ' . $delete,
+
                 ];
                 $data[] = $row;
             }
