@@ -25,9 +25,9 @@
                 <label for="tgl_realisasi">Tanggal Realisasi</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span> 
                     </div>
-                    <input type="text" name="tgl_realisasi" id="tgl_realisasi" value="<?= $data_real['tgl_realisasi']; ?>" data-date-format="dd-mm-yyyy" class="form-control" autocomplete="off">
+                    <input type="text" name="tgl_realisasi" id="tgl_realisasi" value="<?= format_tanggal($data_real['tgl_realisasi']); ?>" data-date-format="dd-mm-yyyy" class="form-control" autocomplete="off">
                 </div>
                 <small class="text-danger tgl_realisasi"></small>
             </div>

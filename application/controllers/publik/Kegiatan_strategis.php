@@ -95,7 +95,7 @@ class Kegiatan_strategis extends CI_Controller
                 'no' => $no,
                 'skpd' => $skpd['nama_skpd'],
                 'keperluan' => $keperluan,
-                'waktu' => $r['waktu'],
+                'waktu' => $r['waktu'], 
                 'nilai' => 'Rp '.format_rupiah($r['pagu']).' <br>Rp '.format_rupiah($r['nilai']),
                 'realisasi' => format_rupiah($realisasi)."<br>Persen : ".$persen_real." %",
                 'persen' => $tamp_realisasi_fisik
@@ -191,12 +191,12 @@ class Kegiatan_strategis extends CI_Controller
             }
         }
         
-        $tahun=2022;
-        $this->db->select_max('tgl_data');
-        $this->db->from('log_upload');
-        $this->db->where(['tahun' => $tahun, 'st_data' => 2]);
+        $tahun=date('Y');
+        $this->db->select_max('tgl_realisasi');
+        $this->db->from('data_kontrak_real');
+        $this->db->where(['tahun' => $tahun]);
         $tanggal_temp = $this->db->get()->row_array();
-        $tanggal_data = $tanggal_temp['tgl_data'];
+        $tanggal_data = $tanggal_temp['tgl_realisasi']; 
         
         if($jumlah_kegiatan==0){$persen_fisik_all=0;}
         else{$persen_fisik_all=round(($realisasi_fisik_total_all/$jumlah_kegiatan),1);}
