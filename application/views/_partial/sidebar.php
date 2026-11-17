@@ -20,6 +20,9 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
+            <?php if ($this->db->table_exists('pk_user_access') && $this->db->get_where('pk_user_access', ['id_user' => $this->session->userdata('user_id')])->num_rows()): ?>
+                <li class="nav-item"><a href="<?= site_url('pemkab-baru') ?>"><i class="fas fa-sync"></i><p>PRP2 Pemkab Terintegrasi</p></a></li>
+            <?php endif; ?>
             <?php
                 $this->db->select('a.menu_id, a.menu_link, a.menu_icon, a.menu_name');
                 $this->db->join('users_access as b', 'a.menu_id = b.menu_id');
