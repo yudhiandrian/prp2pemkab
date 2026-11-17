@@ -298,3 +298,17 @@ $route['tampilan-aplikasi/edit_foto'] = 'master/tampilan_aplikasi/edit_foto';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes/([.0-9a-zA-Z-]+)'] = FALSE;
+// Modul Pemkab selaras Sumut; URL lama tetap tersedia sebagai arsip operasional.
+$route['pemkab-baru'] = 'pemkab_baru';
+$route['pemkab-baru/form'] = 'pemkab_baru/form';
+$route['pemkab-baru/form/(:num)'] = 'pemkab_baru/form/$1';
+$route['pemkab-baru/detail/(:num)'] = 'pemkab_baru/detail/$1';
+$route['pemkab-baru/save/(:any)'] = 'pemkab_baru/save/$1';
+$route['pemkab-baru/remove/(:any)/(:num)'] = 'pemkab_baru/remove/$1/$2';
+$route['pemkab-baru/file/(:num)'] = 'pemkab_baru/file/$1';
+$route['pemkab-baru/opd'] = 'pemkab_baru/opd';
+$route['pemkab-baru/finance'] = 'pemkab_baru/finance';
+$route['pemkab-baru/sync'] = 'pemkab_baru/sync';
+$route['pemkab-baru/review/(:num)'] = 'pemkab_baru/review/$1';
+$route['pemkab-baru/approve/(:num)'] = 'pemkab_baru/approve/$1';
+$route['pemkab-baru/export'] = 'pemkab_baru/export';

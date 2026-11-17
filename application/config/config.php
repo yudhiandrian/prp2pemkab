@@ -3,7 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
 
 //$config['base_url'] = "http://" . $_SERVER['HTTP_HOST'] . '/';
-$config['base_url'] = "http://" . $_SERVER['HTTP_HOST'] . preg_replace('@/*$@', '', dirname($_SERVER['SCRIPT_NAME']));
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+$base_path = isset($_SERVER['SCRIPT_NAME']) ? rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/.') : '';
+$config['base_url'] = getenv('PRP2_BASE_URL') ?: $scheme . $host . $base_path;
 //$config['base_url'] = 'http://prp2sumut.sumutprov.go.id';
 $config['index_page'] = '';
 $config['uri_protocol']    = 'REQUEST_URI';
